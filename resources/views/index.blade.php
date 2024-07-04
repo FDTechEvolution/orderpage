@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('left-bar')
+    @include('includes.leftbar.default-menu')
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-12 text-center">
