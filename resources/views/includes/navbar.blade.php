@@ -35,11 +35,32 @@
                 </button>
             </li>
             <li class="list-inline-item mx-1 dropdown float-start">
-                <div class="d-flex align-items-center">
-                    <div class="avatar rounded-circle avatar-sm me-2"
-                            style="background-image:url(https://cdn.pixabay.com/photo/2024/01/29/20/40/cat-8540772_960_720.jpg)">
+                <a href="#" id="dropdownAccountOptions" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar rounded-circle avatar-sm me-2"
+                                style="background-image:url(https://cdn.pixabay.com/photo/2024/01/29/20/40/cat-8540772_960_720.jpg)">
+                        </div>
+                        <span class="user-name text-light">
+                            firstname lastname
+                            <i class="fi fi-arrow-down-slim smaller ms-1"></i>
+                        </span>
                     </div>
-                    <span class="user-name">firstname lastname</span>
+                </a>
+                <div aria-labelledby="dropdownAccountOptions" class="dropdown-menu dropdown-menu-clean dropdown-click-ignore end-0 p-2">
+                    <div class="dropdown-header p-2 smaller">Welcome !</div>
+                    <a href="#" class="dropdown-item text-truncate fw-light ps-2">
+                        <i class="mdi mdi-account-key me-1"></i> เปลี่ยนรหัสผ่าน
+                    </a>
+                    <a href="#" class="dropdown-item text-truncate fw-light ps-2">
+                        <i class="fas fa-business-time me-1"></i> แจ้งลากิจ / ลาป่วย
+                    </a>
+                    <a href="#" class="dropdown-item text-truncate fw-light ps-2">
+                        <i class="fas fa-percentage me-1"></i> รายงานยอดขาย
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item text-truncate fw-light ps-2 py-3">
+                        <i class="fa-solid fa-arrow-right-from-bracket me-1"></i> ออกจากระบบ
+                    </a>
                 </div>
             </li>
         </ul>

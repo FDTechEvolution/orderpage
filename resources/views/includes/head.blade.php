@@ -19,6 +19,8 @@
 
 <!-- Fontawesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!-- Mdi icon -->
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v=@php echo date('YmdHis'); @endphp">
