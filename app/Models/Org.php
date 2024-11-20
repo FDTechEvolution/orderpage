@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * Class Org
- * 
+ *
  * @property string $id
  * @property string $name
  * @property Carbon|null $created
@@ -24,15 +25,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $user_id
  * @property string|null $isperfect
  * @property string|null $address
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
  *
  * @package App\Models
  */
 class Org extends Model
 {
+    use HasUuids;
 	protected $table = 'orgs';
 	public $incrementing = false;
+	public $timestamps = false;
 
 	protected $casts = [
 		'created' => 'datetime',

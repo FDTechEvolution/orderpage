@@ -1,10 +1,68 @@
-@media only screen and (min-width: 992px) {
-    nav.navbar:not(.h-auto) {
-        min-height: 70px;
-        background-color: #202a35 !important;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+
+.kanit-regular {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
-.navbar-collapse ul.nav .nav-item a {
-    color: #FFF;
+.kanit-bold {
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;
+}
+
+/* HTML: <div class="loader"></div> */
+.page-loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.loader {
+    width: 60px;
+    aspect-ratio: 1;
+    display: grid;
+    border: 4px solid #0000;
+    border-radius: 50%;
+    border-right-color: #25b09b;
+    animation: l15 1s infinite linear;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.loader::before,
+.loader::after {
+    content: "";
+    grid-area: 1/1;
+    margin: 2px;
+    border: inherit;
+    border-radius: 50%;
+    animation: l15 2s infinite;
+}
+
+.loader::after {
+    margin: 8px;
+    animation-duration: 3s;
+}
+
+@keyframes l15 {
+    100% {
+        transform: rotate(1turn)
+    }
 }

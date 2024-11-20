@@ -31,7 +31,7 @@
   --bs-gray-700: #506690;
   --bs-gray-800: #384c74;
   --bs-gray-900: #1b2a4e;
-  --bs-primary: #574fec;
+  --bs-primary: #12985d;
   --bs-secondary: #6c757d;
   --bs-success: #6dbb30;
   --bs-info: #73e7f7;
@@ -39,7 +39,7 @@
   --bs-danger: #f64e60;
   --bs-light: #f8f9fa;
   --bs-dark: #2E2E2E;
-  --bs-primary-rgb: 87, 79, 236;
+  --bs-primary-rgb: 18, 152, 93;
   --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 109, 187, 48;
   --bs-info-rgb: 115, 231, 247;
@@ -95,11 +95,11 @@
   --bs-tertiary-bg: #f9fbfd;
   --bs-tertiary-bg-rgb: 249, 251, 253;
   --bs-heading-color: inherit;
-  --bs-link-color: #574fec;
-  --bs-link-color-rgb: 87, 79, 236;
+  --bs-link-color: #12985d;
+  --bs-link-color-rgb: 18, 152, 93;
   --bs-link-decoration: none;
-  --bs-link-hover-color: #463fbd;
-  --bs-link-hover-color-rgb: 70, 63, 189;
+  --bs-link-hover-color: #12985d;
+  --bs-link-hover-color-rgb: 18, 152, 93;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fef7e4;
   --bs-border-width: 1px;
@@ -169,7 +169,7 @@
   --bs-link-color: #9a95f4;
   --bs-link-hover-color: #aeaaf6;
   --bs-link-color-rgb: 154, 149, 244;
-  --bs-link-hover-color-rgb: 174, 170, 246;
+  --bs-link-hover-color-rgb: 18, 152, 93;
   --bs-code-color: #e685b5;
   --bs-border-color: #506690;
   --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
@@ -11320,7 +11320,7 @@ input.text-white::-moz-placeholder {
   text-shadow: -1px 1px 18px rgba(0, 0, 0, 0.6); }
 
 /*
-	
+
 	.shadow-primary-*
 	.shadow-secondary-*
 	.....
@@ -11690,7 +11690,7 @@ input.text-white::-moz-placeholder {
   bottom: -100%; }
 
 /**
-	
+
 	Right in the center
 
 **/
@@ -11789,7 +11789,7 @@ input.text-white::-moz-placeholder {
 
 /**
 
-		- Overlays & Opacity 		
+		- Overlays & Opacity
 
 		.opacity-* [0-9], .opacity-none
 		.overlay-light, .overlay-dark, .overlay-opacity-* [0-9]
@@ -11987,7 +11987,7 @@ input.text-white::-moz-placeholder {
     opacity: 1; } }
 
 /**
-		- Misc 
+		- Misc
 
 		- Gradients 				.bg-gradient-light-top, .bg-gradient-light-bottom
 									.bg-gradient-light-left, .bg-gradient-light-right
@@ -12000,8 +12000,8 @@ input.text-white::-moz-placeholder {
 									.bg-theme-color-light
 **/
 /**
-	
-	Misc 
+
+	Misc
 
 **/
 .bg-cover {
@@ -12034,7 +12034,7 @@ input.text-white::-moz-placeholder {
   background-color: #fefaf4 !important; }
 
 /**
-	
+
 	Gradients
 
 	Note: can be used together with any .bg-*
@@ -12088,7 +12088,7 @@ input.text-white::-moz-placeholder {
   background: linear-gradient(to bottom, white 0%, #f8f9fa 100%) !important; }
 
 /**
-	
+
 	Backgrounds
 		.bg-*
 
@@ -12143,7 +12143,7 @@ input.bg-diff:focus,
 textarea.bg-diff:focus {
   background-color: rgba(0, 0, 0, 0.11); }
 
-/* 
+/*
 
 	Soft backgrounds
 		.bg-*-soft
@@ -12213,7 +12213,7 @@ textarea.bg-diff:focus {
 .bg-dark-soft-hover:hover {
   background-color: #c4c4c4 !important; }
 
-/* 
+/*
 
 	Light backgrounds
 		.bg-*-light
@@ -12243,7 +12243,7 @@ textarea.bg-diff:focus {
 .bg-dark-light {
   background-color: rgba(46, 46, 46, 0.04) !important; }
 
-/* 
+/*
 
 	Active backgrounds
 		.active.bg-*-active
@@ -12281,7 +12281,7 @@ textarea.bg-diff:focus {
   color: #ffffff !important;
   background-color: #2E2E2E !important; }
 
-/* 
+/*
 
 	Hover backgrounds
 		.bg-*-hover
@@ -12345,7 +12345,7 @@ textarea.bg-diff:focus {
 .text-dark-hover:hover {
   color: #000 !important; }
 
-/* 
+/*
 
 	Radial backgrounds
 	IE 10+
@@ -12354,7 +12354,7 @@ textarea.bg-diff:focus {
 
 	-- --
 
-	As a general rule, a solid background-color is 
+	As a general rule, a solid background-color is
 	used as a fallback! We can use a combination with
 	bg-* classes so we avoid adding useless CSS lines!
 
@@ -12388,11 +12388,11 @@ textarea.bg-diff:focus {
 .bg-gradient-radial-dark {
   background-image: radial-gradient(circle, rgba(117, 117, 117, 0.4), #2E2E2E 70%) !important; }
 
-/* 
+/*
 
 	Linear Backgrounds
 	Multi Colors
-	
+
 */
 .bg-gradient-linear-default {
   background-color: #9d009f !important;
@@ -12617,8 +12617,8 @@ textarea.bg-diff:focus {
 .fill-muted {
   fill: #506690 !important; }
 
-/* 
-	svg drawlines 
+/*
+	svg drawlines
 
 	<svg class="svg-drawlines h--20 position-absolute start-0 bottom-0 mb--n10" viewBox="0 0 154 13">
 		<path fill="none" d="M2 2c49.7 2.6 100 3.1 150 1.7-46.5 2-93 4.4-139.2 7.3 45.2-1.5 90.6-1.8 135.8-.6" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"></path>
@@ -12663,9 +12663,9 @@ textarea.bg-diff:focus {
   height: auto;
   max-height: 100%; }
 
-/* 
+/*
 
-	scrollable horizontal 
+	scrollable horizontal
 	Do not use dropdowns inside
 
 	@Dependencies: 		_responsive.scss
@@ -12757,7 +12757,7 @@ textarea.bg-diff:focus {
 
 /**
 
-		- Hide 
+		- Hide
 
 **/
 .hide {
@@ -12778,7 +12778,7 @@ textarea.bg-diff:focus {
   width: 2px;
   height: 2px; }
 
-/* 
+/*
 
 	Items are hidden but visible on mouse over.
 	Example: seful to hide "delete" button but visible on hover
@@ -12806,7 +12806,7 @@ textarea.bg-diff:focus {
 .show-hover-container-all:hover .show-hover-item-all {
   visibility: visible !important; }
 
-/* 
+/*
 
 	VIZIBILITY CLASSES, EASIER|INTUITIVE (old bootstrap)
 	INSTEAD OF .d-*
@@ -13320,7 +13320,7 @@ textarea.bg-diff:focus {
 /**
 
 		- Bordered Grid 			.row-grid
-		
+
 **/
 /* bordered grid */
 .ul-grid,
@@ -13417,7 +13417,7 @@ textarea.bg-diff:focus {
     flex: 0 0 20%;
     max-width: 20%; } }
 
-/* 
+/*
   Grid Gutters
 */
 .gutters-xxs {
@@ -13559,7 +13559,7 @@ textarea.bg-diff:focus {
 
 /**
 
-		- Table 
+		- Table
 
 **/
 /* bootstrap fix */
@@ -13633,7 +13633,7 @@ textarea.bg-diff:focus {
   opacity: .65;
   pointer-events: none; }
 
-/* 
+/*
 
 	Links
 		.text-
@@ -13696,7 +13696,7 @@ a.text-dark-hover:focus,
 a.text-dark-hover:hover {
   color: #2E2E2E !important; }
 
-/* 
+/*
 
 	Color text
 
@@ -13830,13 +13830,13 @@ em.text-danger-gradient {
 
 		- Generic Animations 		.animate-fadein 			CSS: 	animation: __utilFadeIn .25s ease;
                                     .animate-fadeinSlow         CSS:    animation: __utilFadeInSlow 2s ease;
-									
+
 									.animate-fadeinup 			CSS: 	animation: __utilFadeInUp .25s ease-out forwards;
 									.animate-fadeindown 		CSS: 	animation: __utilFadeInDown .25s ease-out forwards;
-									
+
 									.animate-bouncein 			CSS: 	animation: __utilBounceIn .25s ease-out forwards;
 									.animate-bounceinup			CSS: 	animation: __utilBounceInUp .25s ease-out forwards;
-									
+
 									.animate-shine				CSS: 	animation: __utilShine 6s infinite ease-in-out;
 									.animate-pulse 				CSS: 	animation: __utilPulse 2s infinite;
 									.animate-reveal-up	 		(50px)
@@ -13905,7 +13905,7 @@ em.text-danger-gradient {
 
 	Fade In
 	animation: __utilFadeIn .25s ease;
-	
+
 */
 @keyframes __utilFadeIn {
   0% {
@@ -13942,7 +13942,7 @@ em.text-danger-gradient {
 
 /*
 
-	Fade in up 
+	Fade in up
 	Fade in down
 
 */
@@ -14216,9 +14216,9 @@ em.text-danger-gradient {
 /**
 
 		- Responsive (mobile) 		.text-center-xs, .float-none-xs, .d-block-xs
-									.m--0-xs, .m*--0-xs, 
-									.p--0-xs, .p*--0-xs, 
-									.b--0-xs, .b*--0-xs, 
+									.m--0-xs, .m*--0-xs,
+									.p--0-xs, .p*--0-xs,
+									.b--0-xs, .b*--0-xs,
 
 **/
 @media only screen and (min-width: 991px) {
@@ -14447,7 +14447,7 @@ em.text-danger-gradient {
     border-radius: 50% !important; }
   .overlay-none-xs:after {
     display: none !important; }
-  /* 
+  /*
 	  Grid Gutters
 	*/
   .gutters-xxs--xs {
@@ -15531,7 +15531,7 @@ em.text-danger-gradient {
 .close:hover {
   opacity: 1; }
 
-/* 
+/*
 
 	Icon Spacing|Correction
 
@@ -15552,8 +15552,8 @@ ul.list-icons > li > i,
   display: inline-block;
   margin-right: 10px; }
 
-/* 
-		using .group-icon 
+/*
+		using .group-icon
 		or icon is placed last one
 	*/
 .btn > span + .group-icon,
@@ -15567,7 +15567,7 @@ ul.list-icons > li > i,
 .btn + .btn {
   margin-left: .5rem; }
 
-/* 
+/*
 
 	Modal & Alert Close Buttons
 
@@ -15575,7 +15575,7 @@ ul.list-icons > li > i,
 button.close .fi {
   font-size: 18px; }
 
-/* 
+/*
 
 	Soft buttons
 		.btn-soft 			- transition to original button color
@@ -15630,7 +15630,7 @@ button.close .fi {
   border-color: #c4c4c4;
   background-color: #c4c4c4; }
 
-/* 
+/*
 
 	Shadowed buttons
 		* cancel hover shadow by adding .btn-noshadow -or- .shadow-none
@@ -15676,7 +15676,7 @@ button.close .fi {
 .btn-dark:not(.btn-noshadow):not(.btn-soft):active {
   box-shadow: 0 4px 11px rgba(46, 46, 46, 0.35); }
 
-/* 
+/*
 
 	Vendor buttons
 		* cancel hover shadow by adding .btn-noshadow
@@ -15792,7 +15792,7 @@ button.close .fi {
 .btn-email:active {
   box-shadow: 0 4px 11px rgba(4, 159, 179, 0.35); }
 
-/* 
+/*
 
 	Pill buttons
 	Also, we have .rounded-bill in bootstrap
@@ -15801,7 +15801,7 @@ button.close .fi {
 .btn-pill {
   border-radius: 50rem; }
 
-/* 
+/*
 
 	Icon buttons
 
@@ -15844,7 +15844,7 @@ button.close .fi {
   padding: 0 !important;
   transform: translateY(-50%); }
 
-/* 
+/*
 
 	Ghost buttons
 
@@ -15854,7 +15854,7 @@ button.close .fi {
   border-color: transparent !important; }
 
 @media only screen and (max-width: 991px) {
-  /* 
+  /*
 	Example usage case
 
 	<a href="#" class="btn btn-sm rounded-circle-xs btn-primary">
@@ -16057,7 +16057,7 @@ a.btn-burger-menu.active:hover .burger-menu:after {
     -moz-column-count: 4;
          column-count: 4; } }
 
-/* 
+/*
 
   Soft badges
     .badge-soft
@@ -16144,14 +16144,14 @@ a.btn-burger-menu.active:hover .burger-menu:after {
 .badge-ico-sm > i:before {
   padding-top: 0; }
 
-/* 
+/*
 
 	DROPDOWN : GENERAL SETUP
-	
+
 	--
 
 	Bootstrap is "missing" nested|multilevel dropdowns and opening them on mouse over!
-	So, instead of developing new plugins reinventing the weel (more code, more issues), 
+	So, instead of developing new plugins reinventing the weel (more code, more issues),
 	we use dropdowns for almost everything!
 
 	++++++++++++++++++++++
@@ -16176,8 +16176,8 @@ a.btn-burger-menu.active:hover .burger-menu:after {
   color: var(--bs-tertiary-color) !important;
   pointer-events: none; }
 
-/* 
-	default dropdown link 
+/*
+	default dropdown link
 	hovers : see @media on bottom
 */
 .dropdown-link {
@@ -16215,7 +16215,7 @@ a.dropdown-footer:not(:hover),
 a.dropdown-item {
   position: relative; }
 
-/* 
+/*
 		highlighted/active color
 		hovers : see @media
 	*/
@@ -16250,7 +16250,7 @@ a.dropdown-item {
 .dropdown-item > span + i {
   margin-left: 12px; }
 
-/* 
+/*
 
 	DROPDOWN : UPPERCASE FORCED
 	also font scaled down to avoid too large looking
@@ -16260,10 +16260,10 @@ a.dropdown-item {
   text-transform: uppercase;
   font-size: 13px; }
 
-/* 
+/*
 
 	DROPDOWN : CLEAN
-	no background color on hover 
+	no background color on hover
 
 */
 .dropdown-menu-clean li.active > a:not(.btn),
@@ -16279,7 +16279,7 @@ a.dropdown-item {
 .dropdown-menu-clean:not(.prefix-link-icon) a:not(.btn):hover {
   color: #574fec; }
 
-/* 
+/*
 
 	DROPDOWN : INVERT
 	open in oposite direction
@@ -16320,15 +16320,15 @@ a.dropdown-item {
 
 /* turn down icon */
 @media only screen and (max-width: 991px) {
-  /* 
-				deep links indicator 
+  /*
+				deep links indicator
 				turn icon down on active
 			*/
   .dropdown-menu:not(.dropdown-menu-invert) .dropdown-item.show > a:after {
     transform: rotate(90deg); } }
 
-/* 
-	DROPDOWN : MEGA 
+/*
+	DROPDOWN : MEGA
 	Dropdown links inside mega menu
 
 	Links are formatted for dropdown.
@@ -16347,8 +16347,8 @@ a.dropdown-item {
   margin-bottom: 1px;
   margin-left: 0px; }
 
-/* 
-	Dropdown mega menu 
+/*
+	Dropdown mega menu
 	multiple lists, same column
 */
 .dropdown-mega .row ul + div,
@@ -16367,7 +16367,7 @@ a.dropdown-item {
 /*
 
 	PREFIX ICON|INDICATOR
-		
+
 		Add to .dropdown-menu following classes:
 			.prefix-link-icon .prefix-icon-dot 		- link prefix
 			.prefix-link-icon .prefix-icon-line 	- link prefix
@@ -16478,7 +16478,7 @@ a.prefix-icon-arrow:not(.prefix-icon-ignore):before,
   .dropdown-menu-hover + .dropdown-menu:hover,
   .dropdown-menu-hover:hover + .dropdown-menu {
     display: block; }
-  /* 
+  /*
 		Dropdown mega menu : full width
 	*/
   .dropdown-mega > .dropdown-menu {
@@ -16488,8 +16488,8 @@ a.prefix-icon-arrow:not(.prefix-icon-ignore):before,
     left: 0;
     right: 0;
     padding: 25px; }
-  /* 
-		Dropdown mega menu : Sizes 
+  /*
+		Dropdown mega menu : Sizes
 	*/
   .dropdown-mega-sm {
     width: 300px; }
@@ -16503,7 +16503,7 @@ a.prefix-icon-arrow:not(.prefix-icon-ignore):before,
     width: 800px; }
   /*
 
-		DROPDOWN : DARK 
+		DROPDOWN : DARK
 	*/
   .dropdown-menu-dark,
   .dropdown-menu-dark .dropdown-menu {
@@ -16540,13 +16540,13 @@ a.prefix-icon-arrow:not(.prefix-icon-ignore):before,
 
 /* mobile only */
 @media only screen and (max-width: 991px) {
-  /* 
-		default dropdown link 
+  /*
+		default dropdown link
 		do not keep it active on second click
 	*/
   a.dropdown-link:hover {
     color: inherit; }
-  /* 
+  /*
 		Dropdown mega menu / full width
 	*/
   /* links inside mega menu */
@@ -16608,7 +16608,7 @@ th > .form-check input {
 
 /*
 
-  <i class="switch-icon"></i> 
+  <i class="switch-icon"></i>
   <i class="switch-icon active"></i>
   <i class="switch-icon disabled"></i>
 
@@ -16650,18 +16650,18 @@ th > .form-check input {
   transition: all 114ms ease-in;
   margin: 0.125rem;
   left: 0;
-  /* 
+  /*
 
     SASS MATH
       height: 35px   (.switch-icon)
       margin: 3px
-      
+
       height - (margin * 2)
       35px   - (3px   * 2)
 
       = 29px
 
-    width: 29px; 
+    width: 29px;
     height: 29px;
 
   */ }
@@ -16671,15 +16671,15 @@ input:checked + .switch-icon:before,
 .active + .switch-icon:before,
 .switch-icon.active:before {
   background-color: #ffffff;
-  /* 
+  /*
 
     SASS MATH
       height: 29px   (.switch-icon:before)
       margin: 3px
-      
+
       100% - height - margin
       100% - 29px  - 3px
-  
+
     margin-left: calc(100% - 29px - 3px);
 
   */ }
@@ -16884,15 +16884,15 @@ table.table-striped td {
   color: #869ab8 !important; }
 
 /**
-	
+
 	SIDEBAR
 
 	Dropped .aside-left & .aside-right
-		.aside-start = left  on LTR 
-		.aside-start = right on RTL 
+		.aside-start = left  on LTR
+		.aside-start = right on RTL
 
-		.aside-end = right  on LTR 
-		.aside-end = left on RTL 
+		.aside-end = right  on LTR
+		.aside-end = left on RTL
 
 
 
@@ -16947,10 +16947,10 @@ aside.aside-end {
 .bg-aside {
   background-color: #1b2a4e; }
 
-/* 
+/*
 
 	Nav Item
-	Paddings 
+	Paddings
 	orig: .5rem 1rem
 
 */
@@ -16988,8 +16988,8 @@ aside .nav-deep.nav-deep-xs > ul > li ul > li > a {
   padding-top: .3rem;
   padding-bottom: .3rem; }
 
-/* 
-	hover & active background color 
+/*
+	hover & active background color
 	overwrite _navigations.scss
 */
 .aside-secondary nav.nav-deep-hover > ul > li.nav-item:hover,
@@ -17000,7 +17000,7 @@ aside .nav-deep.nav-deep-xs > ul > li ul > li > a {
 .aside-primary nav.nav-deep-hover > ul > li.nav-item.active {
   background-color: rgba(0, 0, 0, 0.05) !important; }
 
-/* 
+/*
 	disabled links
 */
 .aside-secondary a.disabled {
@@ -17009,12 +17009,12 @@ aside .nav-deep.nav-deep-xs > ul > li ul > li > a {
 .aside-primary a.disabled {
   color: #61729c !important; }
 
-/* 
+/*
 	spacings
 */
 /*
 
-	EXTENDED NAV 
+	EXTENDED NAV
 	Like a secondary sidebar
 
 */
@@ -17056,7 +17056,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
 
 /*
 
-	Header : match sidebar 
+	Header : match sidebar
 	background color
 
 */
@@ -17067,8 +17067,8 @@ aside .nav-item.nav-item-extended.active > .aside-item {
   background-color: #ffffff; }
 
 /**
-	
-	CUSTOM, SIMPLE 
+
+	CUSTOM, SIMPLE
 	(ecommerce cart, etc)
 
 **/
@@ -17106,12 +17106,12 @@ aside .nav-item.nav-item-extended.active > .aside-item {
   transform: translate3d(0, 0, 0); }
 
 /**
-	
+
 	Responsive
 
 **/
 @media only screen and (min-width: 992px) {
-  /* 
+  /*
 		ASIDE : FOCUS
 		Push header
 	*/
@@ -17198,7 +17198,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
     z-index: 9999; } }
 
 /**
-	
+
 	Fullscreen Element
 
 **/
@@ -17267,7 +17267,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
 /*
 
 	Process Steps
-	
+
 	.process-steps-primary
 
 	<ol class="process-steps text-muted">
@@ -17329,9 +17329,9 @@ aside .nav-item.nav-item-extended.active > .aside-item {
   background: #574fec;
   border-color: #574fec; }
 
-/* 
+/*
 
-	Thumbnail : Shadow drop 
+	Thumbnail : Shadow drop
 
 */
 .thumbnail-shadow-drop {
@@ -17394,7 +17394,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
           Event Title
         </h4>
         <small class="text-muted">Tue Nov 10, 2020</small>
-       	
+
        	<div class="mt-4">
         	<p>Lorem ipsum...</p>
         	<a href="#!" class="text-dashed">read more</a>
@@ -17534,7 +17534,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
   transform: scaleX(2) scaleY(5) rotate(-8deg); }
 
 /**
-    
+
     Responsive
 
 **/
@@ -17555,7 +17555,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
 		1. Pill inputs/selects/textarea
 		2. Link over input/textarea
 		3. Switch
-		4. Radio 
+		4. Radio
 		5. Checkbox
 		6. Select
 		7. Material Design Style
@@ -17563,7 +17563,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
 		9. Selectors
 
 **/
-/* 
+/*
 
 	1. Pill Form
 		.form-tontrol-pill 		- used for each element or for the entire form
@@ -17585,7 +17585,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
 .input-group select {
   border-radius: 0 !important; }
 
-/* 
+/*
 
 	2. Link over input/textarea
 
@@ -17620,12 +17620,12 @@ aside .nav-item.nav-item-extended.active > .aside-item {
   z-index: 5 !important;
   right: 0; }
 
-/* 
+/*
 
 	3. Switch
 
 */
-/* @toggle switch elements 
+/* @toggle switch elements
 -------------------------------------------------- */
 .form-switch {
   cursor: pointer;
@@ -17687,7 +17687,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
 .form-switch > input:focus + i:after {
   background: #fff; }
 
-/* @toggle switch normal state 
+/* @toggle switch normal state
 --------------------------------------------------------------- */
 .form-switch > input:checked + i {
   border-color: #333;
@@ -17737,7 +17737,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
   /* mobile fix - because some characters like "✔" are emoji rewritten by vedors (apple/android/etc) */
   left: 1px; }
 
-/* @toggle switch normal state focus 
+/* @toggle switch normal state focus
 --------------------------------------------------------------------------------- */
 .form-switch-pill > i {
   border-radius: 13px; }
@@ -17765,7 +17765,7 @@ aside .nav-item.nav-item-extended.active > .aside-item {
   border-color: #e9ecef !important;
   background: #e9ecef !important; }
 
-/* 
+/*
 
 	4. Radio
 
@@ -17892,7 +17892,7 @@ a.form-radio.disabled > i,
   border-color: #e9ecef !important;
   background: #e9ecef !important; }
 
-/* 
+/*
 
 	5. Checkbox
 
@@ -18026,7 +18026,7 @@ a.form-checkbox.disabled > i,
   border-color: #e9ecef !important;
   background: #e9ecef !important; }
 
-/* 
+/*
 
 	6. Select
 
@@ -18453,14 +18453,14 @@ aside nav.nav-deep-dark.nav-deep-indicator-dot ul li .nav-item.active > .nav-lin
 aside nav.nav-deep-light.nav-deep-indicator-dot ul li .nav-item.active > .nav-link:before {
   background-color: #1c0950; }
 
-/* 
-	Bordered nav 
+/*
+	Bordered nav
 */
 .nav-deep-bordered > ul > li {
   border-bottom: rgba(0, 0, 0, 0.1) 1px solid; }
 
-/* 
-	Icons 
+/*
+	Icons
 */
 /* main link icon */
 nav.nav-deep > ul > li > a.nav-link > i.nav-icon {
@@ -18504,7 +18504,7 @@ nav.nav-deep > ul > li > a.nav-link > svg {
   padding-left: 15px; }
 
 /**
-	
+
 	Simple quick default navigation
 	Nav : Default
 	For any list
@@ -18556,7 +18556,7 @@ nav.nav-deep > ul > li > a.nav-link > svg {
   color: #506690; }
 
 /**
-	
+
 	Responsive
 
 **/
@@ -20248,7 +20248,7 @@ button.close {
   content: "\f1bc"; }
 
 /**
-	
+
 	LAYOUT :: HEADER
 
 	Note: Here are basic settings only!
@@ -20280,7 +20280,7 @@ header.main-nav a,
 .nav-item > .dropdown-menu {
   margin: 0; }
 
-/* 
+/*
 	Main Links :: Icon Indicator
 */
 .navbar-nav .nav-link.dropdown-toggle:not(.nav-link-caret-hide):before {
@@ -20303,7 +20303,7 @@ header.main-nav a,
 body.header-scroll-reveal.user-scrolled-down #header:not(.shadow-none) {
   box-shadow: 0 0 25px rgba(140, 152, 164, 0.1); }
 
-/* 
+/*
 	Navbar Toggler
 */
 .navbar-toggler {
@@ -20326,8 +20326,8 @@ body.header-scroll-reveal.user-scrolled-down #header:not(.shadow-none) {
   display: inline-block; }
 
 /*
-	
-	HEADER TOGGLE 
+
+	HEADER TOGGLE
 	up|down header
 
 */
@@ -20357,19 +20357,19 @@ body.layout-admin #wrapper_content.js-animation-enable {
   margin-right: 8px; }
 
 /**
-	
+
 	Responsive
 
 **/
 @media only screen and (min-width: 992px) {
   nav.navbar:not(.h-auto) {
     min-height: 80px; }
-  /* 
+  /*
 		Dropdown mega menu / full width
 	*/
   .nav-item.dropdown-mega {
     position: inherit; }
-  /* 
+  /*
 		Main Navigation Links
 	*/
   .navbar-nav:not(.navbar-sm) {
@@ -20384,7 +20384,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
     padding-left: 10px; }
   .navbar .navbar-nav .nav-link.dropdown-toggle:not(.nav-link-caret-hide) {
     padding-right: 30px; }
-  /* 
+  /*
 		.navbar-sm
 		used under large search
 		(header-variant-1.html)
@@ -20398,7 +20398,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
     padding-left: 0; }
   .navbar .navbar-nav a.nav-link {
     height: 100%; }
-  /* 
+  /*
 		Brand|Logo
 		Frontend only
 	*/
@@ -20422,7 +20422,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
   .navbar .dropdown-menu.dropdown-menu-up-n250 {
     top: -250px !important;
     bottom: auto !important; }
-  /** 
+  /**
 
 		Horizontal Navigation
 
@@ -20460,7 +20460,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
     overflow: hidden; } }
 
 @media only screen and (max-width: 991px) {
-  /* 
+  /*
 		@FIX
 		Main Links :: Icon Indicator
 	*/
@@ -20471,13 +20471,13 @@ body.layout-admin #wrapper_content.js-animation-enable {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 1px !important; }
-  /* 
+  /*
 		Childs padding
 	*/
   .navbar-nav .dropdown-menu > .dropdown-item > .dropdown-menu {
     padding-left: 15px !important; }
   /*
-	
+
 		Styling
 
 	*/
@@ -20560,7 +20560,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
     font-size: inherit; } }
 
 /**
-	
+
 	DEFAULTS
 
 **/
@@ -20571,7 +20571,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
   color: #ffffff !important; }
 
 /**
-	
+
 	LAYOUT :: FOOTER
 
 **/
@@ -20604,7 +20604,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
   background-color: rgba(0, 0, 0, 0.03); }
 
 /**
-	
+
 	Responsive
 
 **/
@@ -20635,12 +20635,12 @@ body.layout-admin #wrapper_content.js-animation-enable {
     padding: 0; } }
 
 /**
-	
+
 	LAYOUT :: SIDEBAR
 
 **/
 /**
-	
+
 	Responsive
 
 **/
@@ -20654,7 +20654,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
     width: 290px !important; } }
 
 /**
-	
+
 	LAYOUT :: GLOBALS
 
 **/
@@ -20673,7 +20673,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
   padding-right: 15px; }
 
 /**
-	
+
 	Ignore Bootstrap breakpoints (< 1200px)
 	Should be used with (.container) class
 
@@ -20682,7 +20682,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
   .container-ignore-breakpoints {
     max-width: 100%; } }
 
-/* 
+/*
 	.container-xlg container (+200px)
 	Bootstrap is up to 1200
 */
@@ -20695,7 +20695,7 @@ body.layout-admin #wrapper_content.js-animation-enable {
     max-width: 100%; } }
 
 /**
-	
+
 	Responsive
 
 **/
@@ -20729,12 +20729,12 @@ body.layout-admin #wrapper_content.js-animation-enable {
     border-bottom-right-radius: 0.25rem; } }
 
 /**
-	
+
 	LAYOUT :: MISC
 
 **/
 /**
-	
+
 	Wrapper
 
 **/
@@ -20746,7 +20746,7 @@ body:not(.layout-admin) #wrapper {
 }
 **/
 /**
-	
+
 	Top bar
 
 **/
@@ -20762,7 +20762,7 @@ body:not(.layout-admin) #wrapper {
   font-size: 0.9rem; }
 
 /**
-	
+
 	Responsive
 
 **/
@@ -20873,10 +20873,10 @@ button > i, button > svg,
   box-shadow: inherit; }
 
 /**
-	
+
 	LAYOUT :: ADMIN
 
-	We set here very few important & general rules to 
+	We set here very few important & general rules to
 	avoid issues on fixed sidebar/header
 
 **/
@@ -21029,7 +21029,7 @@ body.layout-admin #header.bg-dark {
 
 		Not fully supported by old browsers!
 		But is ok for admin!
-		
+
 		https://caniuse.com/#feat=css-sticky
 
 	**/
@@ -21059,7 +21059,7 @@ aside.overlay-dark:after {
   border-radius: 0.35rem; }
 
 /**
-	
+
 	Responsive
 
 **/
@@ -21073,7 +21073,7 @@ aside.overlay-dark:after {
     margin-left: -15px !important;
     padding-left: 15px !important; }
   /**
-		
+
 		LAYOUT : PADDED
 
 	**/
@@ -21124,7 +21124,7 @@ aside.overlay-dark:after {
 **/
 /*$modal-backdrop-bg:                   #131f43 !default;*/
 /*
-    
+
   Styling
   Ajax Loading Icons
 
@@ -21155,7 +21155,7 @@ form.js-ajax #js_loading_icon {
 
 **/
 /*$modal-backdrop-bg:                   #131f43 !default;*/
-/** 
+/**
 
 	Stepofeb Header
 	www.stepofweb.com
@@ -21299,7 +21299,7 @@ body.header-over:not(.user-scrolled-down) #header .btn.rounded-circle:not(.text-
 
 **/
 /*$modal-backdrop-bg:                   #131f43 !default;*/
-/** 
+/**
 
 	Stepofeb Search Suggest
 	www.stepofweb.com
@@ -21415,7 +21415,7 @@ form.sow-search input.form-control-sow-search:not(.form-control-custom):not(.for
   form.sow-search input.form-control-sow-search.form-control-lg:not(.form-control-custom) {
     font-size: 1.3rem !important; } }
 
-/* 
+/*
 	MOBILE
 */
 @media only screen and (max-width: 991px) {

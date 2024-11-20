@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * Class Customer
- * 
+ *
  * @property string $id
  * @property string|null $fullname
  * @property string|null $mobile
@@ -31,7 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Customer extends Model
 {
-	protected $table = 'customers';
+    use HasUuids;
+    protected $table = 'customers';
 	public $incrementing = false;
 
 	protected $casts = [
@@ -51,4 +53,8 @@ class Customer extends Model
 		'district',
 		'province'
 	];
+
+    public function orders(){
+        return $this->hasMany(Order::class,'customer_id','id');
+    }
 }

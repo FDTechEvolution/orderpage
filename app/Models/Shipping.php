@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * Class Shipping
- * 
+ *
  * @property string $id
  * @property string $name
  * @property string $code
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Shipping extends Model
 {
+    use HasUuids;
 	protected $table = 'shippings';
 	public $incrementing = false;
 

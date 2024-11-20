@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * Class Order
- * 
+ *
  * @property string $id
  * @property string $customer_id
  * @property Carbon $orderdate
@@ -55,15 +56,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $sales_channel_id
  * @property string|null $sales_channel_line_id
  * @property string|null $isrepeat_purchase
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property string|null $is_cod_received
  *
  * @package App\Models
  */
 class Order extends Model
 {
+    use HasUuids;
 	protected $table = 'orders';
 	public $incrementing = false;
+	public $timestamps = false;
 
 	protected $casts = [
 		'orderdate' => 'datetime',
@@ -120,6 +122,32 @@ class Order extends Model
 		'historylog',
 		'sales_channel_id',
 		'sales_channel_line_id',
-		'isrepeat_purchase'
+		'isrepeat_purchase',
+		'is_cod_received',
+        'cod_receivedamt'
 	];
+
+    public function customer(){
+        return $this->hasOne(Customer::class,'id','customer_id');
+    }
+
+    public function org(){
+        return $this->hasOne(Org::class,'id','org_id');
+    }
+
+    public function shipping(){
+        return $this->hasOne(Shipping::class,'id','shipping_id');
+    }
+
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function orderLines(){
+        return $this->hasMany(OrderLine::class,'order_id','id')->with('product')->orderBy('created','ASC');
+    }
+
+    public function orderLogs(){
+        return $this->hasMany(OrderLog::class,'order_id','id')->with('user')->orderBy('created_at','ASC');
+    }
 }

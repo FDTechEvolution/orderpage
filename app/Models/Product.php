@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * Class Product
- * 
+ *
  * @property string $id
  * @property string $org_id
  * @property string $name
@@ -31,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
+    use HasUuids;
 	protected $table = 'products';
 	public $incrementing = false;
 
@@ -54,4 +56,8 @@ class Product extends Model
 		'weight',
 		'barcode'
 	];
+
+    public function productCategory(){
+        return $this->hasOne(ProductCategory::class,'id','product_category_id');
+    }
 }

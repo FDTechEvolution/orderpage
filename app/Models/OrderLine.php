@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * Class OrderLine
- * 
+ *
  * @property string $id
  * @property string $order_id
  * @property string $product_id
@@ -30,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OrderLine extends Model
 {
+    use HasUuids;
 	protected $table = 'order_lines';
 	public $incrementing = false;
 
@@ -52,4 +54,12 @@ class OrderLine extends Model
 		'price_list_id',
 		'product_cost_id'
 	];
+
+    public function product(){
+        return $this->hasOne(Product::class,'id','product_id');
+    }
+
+    public function order(){
+        return $this->hasOne(Shipping::class,'id','order_id');
+    }
 }
