@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CODController;
+use App\Http\Controllers\ManageOrderController;
 use App\Http\Controllers\ModalCustomerController;
 use App\Http\Controllers\ModalOrderController;
 use App\Http\Controllers\ModalOrderLineController;
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
         'modalCustomer'=>ModalCustomerController::class,
         'modalOrderLine'=>ModalOrderLineController::class,
         'modalOrder'=>ModalOrderController::class,
+        'manageOrder'=>ManageOrderController::class,
     ]);
 });
 

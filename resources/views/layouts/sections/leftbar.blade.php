@@ -24,14 +24,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('manageOrder.index') }}">
+                        <i class="fa-solid fa-list"></i>
+                        <span>ออเดอร์</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('cod.index') }}">
                         <i class="fa-solid fa-magnifying-glass-dollar"></i>
                         <span>ตรวจยอดเงิน COD</span>
                     </a>
                 </li>
 
+
                 <li class="nav-item mt-4">
-                    <a class="nav-link text-primary" href="{{ route('search.index') }}">
+                    <a class="nav-link fw-bolder" href="{{ route('search.index') }}">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <span>ค้นหา</span>
                     </a>

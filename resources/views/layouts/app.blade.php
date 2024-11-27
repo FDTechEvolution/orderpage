@@ -40,13 +40,15 @@
             <main id="middle" class="flex-fill mx-auto">
                 @if(isset($title) && !empty($title))
                 <header class="mt-lg-n6">
-                    <h1 class="h4 text-primary">{{ $title }}</h1>
+                    <h1 class="h3 text-primary">{{ $title }}</h1>
+                    @isset($description)
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb small">
-                            <li class="breadcrumb-item text-muted active" aria-current="page">You've got 2 new sales
-                                today</li>
+                            <li class="breadcrumb-item text-muted active" aria-current="page">{{ $description }}</li>
                         </ol>
                     </nav>
+                    @endisset
+
                 </header>
                 @endif
 

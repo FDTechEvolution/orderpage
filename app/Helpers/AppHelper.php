@@ -11,4 +11,6 @@ if (!function_exists('getOrgId')) {
     {
         return Auth::user()->id;
     }
+
+    
 }
