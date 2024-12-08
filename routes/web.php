@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CODController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ManageOrderController;
 use App\Http\Controllers\ModalCustomerController;
 use App\Http\Controllers\ModalOrderController;
@@ -10,6 +11,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::controller(GuestController::class)->group(function (){
+    Route::get('/guest/find', 'find')->name('guest.find');
+});
 
 
 Route::get('/dashboard', function () {
