@@ -1,8 +1,11 @@
 <?php
+
+namespace App\Helpers;
+
 use Illuminate\Support\Facades\Http;
 
 class TelegramHelper
- {
+{
     public static function sendTelegram($msg = '')
     {
 
@@ -14,5 +17,4 @@ class TelegramHelper
             'text' => $msg,
         ]);
     }
-
- }
+}

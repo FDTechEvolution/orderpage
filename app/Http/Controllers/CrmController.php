@@ -56,12 +56,14 @@ class CrmController extends Controller
         }
 
         $buyType = request()->buy_type;
+        $orderby = request()->orderby;
+
         $productCategoryId = request()->product_category_id;
         $startDateSql = Carbon::createFromFormat('d/m/Y', $startDate)->format('Y-m-d');
         $endDateSql = Carbon::createFromFormat('d/m/Y', $endDate)->format('Y-m-d');
 
 
-        if (!empty($buyType) && !empty($productCategoryId)) {
+        if (!empty($buyType) && !empty($orderby)) {
             $orgId = getOrgId();
             $sql = "select *
 from
@@ -71,7 +73,7 @@ from orders o join customers c on o.customer_id = c.id
 where o.status not in('VO','VO_RETURN') and o.org_id = :org_id and o.orderdate >= :startdate and o.orderdate <= :enddate
 group by c.fullname,c.mobile order by totalamt DESC
 ) as a
-where :conditions";
+where :conditions order by :orderby";
 
             if ($buyType == 'new') {
                 $sql = str_replace(':conditions', 'a.count_order = 1', $sql);
@@ -79,6 +81,13 @@ where :conditions";
                 $sql = str_replace(':conditions', 'a.count_order > 1', $sql);
             } else {
                 $sql = str_replace(':conditions', '1=1', $sql);
+            }
+
+            if ($orderby == 'value') {
+                //sum(o.totalamt) DESC
+                $sql = str_replace(':orderby', 'a.totalamt DESC', $sql);
+            } else {
+                $sql = str_replace(':orderby', 'a.count_order DESC', $sql);
             }
 
             $customers = DB::select($sql, ['org_id' => $orgId, 'startdate' => $startDateSql, 'enddate' => $endDateSql]);
@@ -95,7 +104,9 @@ where :conditions";
             'startDateSql' => $startDateSql,
             'endDateSql' => $endDateSql,
             'productCategories' => $productCategories,
-            'customers' => $customers
+            'customers' => $customers,
+            'buyType'=>$buyType,
+            'orderby'=>$orderby
         ]);
     }
 

@@ -19,7 +19,15 @@
                     </select>
                 </div>
 
-                <div class="col-6 col-lg-4">
+                <div class="col-6 col-lg-3">
+                    <label class="form-label">เรียงตาม</label>
+                    <select class="form-select" name="orderby">
+                        <option value="value">มูลค่ารวมสูงสุด</option>
+                        <option value="qty">ซื้อซ้ำมากสุด</option>
+                    </select>
+                </div>
+
+                <div class="col-6 col-lg-4" style="display: none;">
                     <label class="form-label">กลุ่มสินค้า</label>
                     <select class="form-select" name="product_category_id">
                         <option value="all">-- ทั้งหมด --</option>
@@ -41,6 +49,9 @@
     @if ($customers != null)
     <x-section>
         <div class="row">
+            <div class="col-12 text-end mb-2">
+                <button type="button" class="btn btn-secondary" id="btn-csv-export">Export to CSV</button>
+            </div>
             <div class="col-12">
                 <div class="table-responsive">
                     <x-table.data-table>
@@ -51,7 +62,7 @@
                                 <th>หมายเลขโทรศัพท์</th>
                                 <th class="text-end">มูลค่าการสั้งซื้อทั้งหมด</th>
                                 <th class="text-end">จำนวนการซื้อซ้ำ</th>
-                                <th class="text-end"></th>
+                                <th class="text-end exclude"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,7 +75,7 @@
                                     <x-label-price :amount="$item->totalamt" />
                                 </td>
                                 <td class="text-end">{{ $item->count_order }}</td>
-                                <td class="text-end">
+                                <td class="text-end exclude">
                                     <a href="{{ route('customer.show',['customer'=>$item->mobile]) }}" target="_blank"><i class="fa-solid fa-circle-info"></i> ประวัติ</a>
                                 </td>
                             </tr>
@@ -76,4 +87,24 @@
         </div>
     </x-section>
     @endif
+
+    @section('script')
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#btn-csv-export').on('click', function() {
+                $("#tb-data").table2excel({
+                    exclude: ".exclude"
+                    , name: "customer"
+                    , filename: "customer.xls", // do include extension
+                    preserveColors: false, // set to true if you want background colors and font colors preserved,
+                    exclude_links: true
+                });
+            });
+        });
+
+    </script>
+    @stop
+
 </x-app-layout>

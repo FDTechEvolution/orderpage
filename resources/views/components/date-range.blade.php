@@ -4,7 +4,7 @@
 <div class="input-group-over position-realtive z-index-1 bg-white ">
     <!-- predefined ranges -->
 
-    <input autocomplete="off" type="text" name="{{ $name }}" @required($required) class="form-control  rangepicker bg-transparent" data-ranges="true" data-date-format="DD/MM/YYYY" data-date-start="{{ $startDate }}" data-date-end="{{ $endDate }}" data-quick-locale='{
+    <input autocomplete="off" type="text" name="{{ $name }}" id="{{ $name }}" @required($required) class="form-control  rangepicker bg-transparent" data-ranges="true" data-date-format="DD/MM/YYYY" data-date-start="{{ $startDate }}" data-date-end="{{ $endDate }}" data-quick-locale='{
 "lang_apply"	: "ตกลง",
 "lang_cancel" : "ยกเลิก",
 "lang_crange" : "เลือกวันด้วยตัวเอง",

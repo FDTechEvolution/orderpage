@@ -3,6 +3,7 @@
 use App\Http\Controllers\CODController;
 use App\Http\Controllers\CrmController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ManageOrderController;
 use App\Http\Controllers\ModalCustomerController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ModalOrderLineController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TrackingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,17 +21,20 @@ Route::controller(GuestController::class)->group(function () {
 });
 
 
+
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+*/
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/', function () {
-        return view('dashboard');
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/', 'index')->name('dashboard.index');
     });
 
     Route::controller(CODController::class)->group(function () {
@@ -46,6 +51,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/crm', 'index')->name('crm.index');
         Route::get('/crm/customer', 'customer')->name('crm.customer');
         Route::get('/crm/product', 'product')->name('crm.product');
+    });
+
+    Route::controller(TrackingController::class)->group(function () {
+        Route::get('/tracking', 'index')->name('tracking.index');
     });
 
     Route::resources([

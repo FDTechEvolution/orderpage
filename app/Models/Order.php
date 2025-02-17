@@ -57,97 +57,110 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
  * @property string|null $sales_channel_line_id
  * @property string|null $isrepeat_purchase
  * @property string|null $is_cod_received
+ * @property float|null $cod_receivedamt
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $shipping_status
+ * @property string|null $shipping_description
  *
  * @package App\Models
  */
 class Order extends Model
 {
     use HasUuids;
-	protected $table = 'orders';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'orders';
+    public $incrementing = false;
 
-	protected $casts = [
-		'orderdate' => 'datetime',
-		'void_date' => 'datetime',
-		'created' => 'datetime',
-		'modified' => 'datetime',
-		'totalamt' => 'float',
-		'record_date' => 'datetime',
-		'shipping_date' => 'datetime',
-		'print_date' => 'datetime',
-		'duedate' => 'datetime',
-		'automation_modified' => 'datetime'
-	];
+    protected $casts = [
+        'orderdate' => 'datetime',
+        'void_date' => 'datetime',
+        'created' => 'datetime',
+        'modified' => 'datetime',
+        'totalamt' => 'float',
+        'record_date' => 'datetime',
+        'shipping_date' => 'datetime',
+        'print_date' => 'datetime',
+        'duedate' => 'datetime',
+        'automation_modified' => 'datetime',
+        'cod_receivedamt' => 'float'
+    ];
 
-	protected $fillable = [
-		'customer_id',
-		'orderdate',
-		'payment_method',
-		'bank_account_id',
-		'status',
-		'void_date',
-		'description',
-		'created',
-		'modified',
-		'totalamt',
-		'user_id',
-		'note',
-		'order_line_des',
-		'order_line_code',
-		'record_date',
-		'createdby',
-		'modifiedby',
-		'ordercode',
-		'shipping_date',
-		'shipping_id',
-		'shipping_stamp',
-		'print_date',
-		'trackingno',
-		'facebook_page_id',
-		'status2',
-		'state_text',
-		'order_text',
-		'tmp_order_id',
-		'payment_status',
-		'ispaid_recorder',
-		'issqueeze',
-		'iscutoff',
-		'isspecialcase',
-		'type',
-		'org_id',
-		'duedate',
-		'printing_set_id',
-		'automation_modified',
-		'historylog',
-		'sales_channel_id',
-		'sales_channel_line_id',
-		'isrepeat_purchase',
-		'is_cod_received',
-        'cod_receivedamt'
-	];
+    protected $fillable = [
+        'customer_id',
+        'orderdate',
+        'payment_method',
+        'bank_account_id',
+        'status',
+        'void_date',
+        'description',
+        'created',
+        'modified',
+        'totalamt',
+        'user_id',
+        'note',
+        'order_line_des',
+        'order_line_code',
+        'record_date',
+        'createdby',
+        'modifiedby',
+        'ordercode',
+        'shipping_date',
+        'shipping_id',
+        'shipping_stamp',
+        'print_date',
+        'trackingno',
+        'facebook_page_id',
+        'status2',
+        'state_text',
+        'order_text',
+        'tmp_order_id',
+        'payment_status',
+        'ispaid_recorder',
+        'issqueeze',
+        'iscutoff',
+        'isspecialcase',
+        'type',
+        'org_id',
+        'duedate',
+        'printing_set_id',
+        'automation_modified',
+        'historylog',
+        'sales_channel_id',
+        'sales_channel_line_id',
+        'isrepeat_purchase',
+        'is_cod_received',
+        'cod_receivedamt',
+        'shipping_status',
+        'shipping_description'
+    ];
 
-    public function customer(){
-        return $this->hasOne(Customer::class,'id','customer_id');
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'customer_id');
     }
 
-    public function org(){
-        return $this->hasOne(Org::class,'id','org_id');
+    public function org()
+    {
+        return $this->hasOne(Org::class, 'id', 'org_id');
     }
 
-    public function shipping(){
-        return $this->hasOne(Shipping::class,'id','shipping_id');
+    public function shipping()
+    {
+        return $this->hasOne(Shipping::class, 'id', 'shipping_id');
     }
 
-    public function user(){
-        return $this->hasOne(User::class,'id','user_id');
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function orderLines(){
-        return $this->hasMany(OrderLine::class,'order_id','id')->with('product')->orderBy('created','ASC');
+    public function orderLines()
+    {
+        return $this->hasMany(OrderLine::class, 'order_id', 'id')->with('product')->orderBy('created', 'ASC');
     }
 
-    public function orderLogs(){
-        return $this->hasMany(OrderLog::class,'order_id','id')->with('user')->orderBy('created_at','ASC');
+    public function orderLogs()
+    {
+        return $this->hasMany(OrderLog::class, 'order_id', 'id')->with('user')->orderBy('created_at', 'ASC');
     }
 }

@@ -8,26 +8,30 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
 
-    public static function getOrderStatuses(){
+    public static function getOrderStatuses()
+    {
         return [
-            'DR'=>'ฉบับร่าง',
-            'CF'=>'ยืนยัน',
-            'P1'=>'ปริ้น',
-            'WS'=>'รอจัดส่ง',
-            'ST'=>'ส่งแล้ว',
-            'DV'=>'กำลังจัดส่ง',
-            'RT'=>'ตีกลับ',
-            'VO'=>'ยกเลิกออเดอร์',
+            'DR' => 'ฉบับร่าง',
+            'CF' => 'ยืนยัน',
+            'P1' => 'ปริ้น',
+            'WS' => 'รอจัดส่ง',
+            'ST' => 'ส่งแล้ว',
+            'DV' => 'กำลังจัดส่ง',
+            'RT' => 'ตีกลับ',
+            'VO' => 'ยกเลิกออเดอร์',
             'VO_RETURN' => 'ปฏิเสธรับสินค้า/รับสินค้าคืน',
             'RECEIVED' => 'ได้รับสินค้าแล้ว',
         ];
     }
 
-    public static function getOrder($id){
-        $order = Order::where('id',$id)->with(['customer','shipping','user','orderLines','orderLogs'])->first();
+    public static function getOrder($id)
+    {
+        $order = Order::where('id', $id)->with(['customer', 'shipping', 'user', 'orderLines', 'orderLogs'])->first();
 
         return $order;
     }
+
+    public static function getListOrders($includeStatus = [], $excludeStatus = []) {}
 
 
 
@@ -63,10 +67,10 @@ class OrderController extends Controller
         $order = $this->getOrder($id);
         $orderHistory = CustomerController::getOrderHistoyies($order->customer->mobile);
 
-        return view('pages.order.show',[
-            'title'=>'รายละเอียดออเดอร์',
-            'order'=>$order,
-            'orderHistory'=>$orderHistory
+        return view('pages.order.show', [
+            'title' => 'รายละเอียดออเดอร์',
+            'order' => $order,
+            'orderHistory' => $orderHistory
         ]);
     }
 
@@ -80,11 +84,11 @@ class OrderController extends Controller
         $orderHistory = CustomerController::getOrderHistoyies($order->customer->mobile);
 
         $orderStatus = $this->getOrderStatuses();
-        return view('pages.order.edit',[
-            'title'=>'แก้ไขออเดอร์',
-            'order'=>$order,
-            'orderHistory'=>$orderHistory,
-            'orderStatus'=>$orderStatus
+        return view('pages.order.edit', [
+            'title' => 'แก้ไขออเดอร์',
+            'order' => $order,
+            'orderHistory' => $orderHistory,
+            'orderStatus' => $orderStatus
         ]);
     }
 
@@ -107,16 +111,16 @@ class OrderController extends Controller
         $oldStatus = $order->status;
         $newStatus = $request->status;
         $status = $this->getOrderStatuses();
-        $title = sprintf('เปลี่ยนสถานะจาก %s เป็น %s',$status[$oldStatus],$status[$newStatus]);
+        $title = sprintf('เปลี่ยนสถานะจาก %s เป็น %s', $status[$oldStatus], $status[$newStatus]);
         $description = $request->description;
 
         $order->status = $newStatus;
         $order->save();
 
-        OrderLogController::createLog($id,$title,$description);
+        OrderLogController::createLog($id, $title, $description);
 
-        session()->flash('success', $title.' เรียบร้อยแล้ว!');
-        return redirect()->route('order.edit',['order'=>$id]);
+        session()->flash('success', $title . ' เรียบร้อยแล้ว!');
+        return redirect()->route('order.edit', ['order' => $id]);
     }
 
     /**
