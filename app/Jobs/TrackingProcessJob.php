@@ -63,7 +63,7 @@ class TrackingProcessJob implements ShouldQueue
     {
         //THPOST
         $shippings = Shipping::whereIn('code', ['THPOST_POSTONE', 'THPOST_PROSHIP'])->select('id')->get();
-
+        $successCount = 0;
         $orders = Order::whereIn('status', ['ST', 'DV'])
             ->where('shipping_status', '!=', 'NOTF')
             ->whereNotNull('trackingno')
@@ -77,12 +77,23 @@ class TrackingProcessJob implements ShouldQueue
         }
         TelegramHelper::sendTelegram('start tracking ' . sizeof($trackings) . ' orders');
         $this->thailandPost = new ThailandPostService();
-        $roundRequests = array_chunk($trackings, 200);
+        $roundRequests = array_chunk($trackings, 20);
         foreach ($roundRequests as $roundRequest) {
+            //$txt = json_encode($roundRequest, JSON_UNESCAPED_UNICODE);
+            //TelegramHelper::sendTelegram($txt);
             $result = $this->thailandPost->trackParcel($roundRequest);
+
+            if ((isset($result['status']) && $result['status'] == false) || !isset($result['response']['items'])) {
+                TelegramHelper::sendTelegram('-----------stop tracking');
+                $txt = json_encode($result, JSON_UNESCAPED_UNICODE);
+                TelegramHelper::sendTelegram($txt);
+                break;
+            }
+
             $items = $result['response']['items'];
             foreach ($items as $trackingno => $Shippingitems) {
                 if (!is_null($Shippingitems) && sizeof($Shippingitems) != 0) {
+                    $successCount++;
                     $lastShippingStatus = end($Shippingitems);
                     $_shippingStatus = $this->shippingStatus['THSIPOST'][$lastShippingStatus['status']];
 
@@ -112,5 +123,7 @@ class TrackingProcessJob implements ShouldQueue
                 }
             }
         }
+
+        TelegramHelper::sendTelegram('success process ' . $successCount . ' orders.');
     }
 }

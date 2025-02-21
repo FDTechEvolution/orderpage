@@ -13,11 +13,17 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TrackingController;
+use App\Jobs\TrackingProcessJob;
 use Illuminate\Support\Facades\Route;
 
 
 Route::controller(GuestController::class)->group(function () {
     Route::get('/guest/find', 'find')->name('guest.find');
+});
+
+Route::get('/job/tracking', function () {
+    TrackingProcessJob::dispatch();
+    return response()->json(['success' => true]);
 });
 
 
@@ -55,6 +61,12 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(TrackingController::class)->group(function () {
         Route::get('/tracking', 'index')->name('tracking.index');
+    });
+
+    Route::controller(ManageOrderController::class)->group(function () {
+        Route::get('/manageOrder/new', 'newOrder')->name('manageOrder.new');
+        Route::get('/manageOrder/checked', 'checked')->name('manageOrder.checked');
+        Route::get('/manageOrder/packing', 'packing')->name('manageOrder.packing');
     });
 
     Route::resources([
