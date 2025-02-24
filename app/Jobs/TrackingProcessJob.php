@@ -47,7 +47,7 @@ class TrackingProcessJob implements ShouldQueue
             "301" => "S102",
             "302" => "S102",
             "303" => "S102",
-            "304" => "S102",
+            "304" => "S103",
             "401" => "S103",
             "402" => "S102",
             "501" => "S104",
@@ -68,7 +68,7 @@ class TrackingProcessJob implements ShouldQueue
             ->where('shipping_status', '!=', 'NOTF')
             ->whereNotNull('trackingno')
             ->where('orderdate', '>=', '2025-01-01')
-            ->whereIn('shipping_id', $shippings)->get();
+            ->whereIn('shipping_id', $shippings)->orderBy('orderdate', 'DESC')->limit(1000)->get();
 
 
         $trackings = [];

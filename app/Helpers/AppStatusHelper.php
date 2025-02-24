@@ -4,9 +4,9 @@ namespace App\Helpers;
 
 class AppStatusHelper
 {
-    public static function getOrderStatus()
+    public static function getOrderStatus($status = null)
     {
-        return [
+        $allStatus = [
             'DR' => 'ฉบับร่าง',
             'CF' => 'ยืนยัน',
             'P1' => 'ปริ้น',
@@ -18,6 +18,11 @@ class AppStatusHelper
             'VO_RETURN' => 'ปฏิเสธรับสินค้า/รับสินค้าคืน',
             'RECEIVED' => 'ได้รับสินค้าแล้ว',
         ];
+
+        if (!empty($status)) {
+            return isset($allStatus[$status]) ? $allStatus[$status] : '';
+        }
+        return $allStatus;
     }
 
     public static function getShippingStatus()

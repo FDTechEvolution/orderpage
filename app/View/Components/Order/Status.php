@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Order;
 
+use App\Helpers\AppStatusHelper;
 use App\Http\Controllers\OrderController;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -22,8 +23,8 @@ class Status extends Component
      */
     public function render(): View|Closure|string
     {
-        $statuses = OrderController::getOrderStatuses();
+        $statuses = AppStatusHelper::getOrderStatus();
 
-        return view('components.order.status',['statuses'=>$statuses]);
+        return view('components.order.status', ['statuses' => $statuses]);
     }
 }

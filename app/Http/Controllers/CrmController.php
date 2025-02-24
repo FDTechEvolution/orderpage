@@ -65,32 +65,36 @@ class CrmController extends Controller
 
         if (!empty($buyType) && !empty($orderby)) {
             $orgId = getOrgId();
-            $sql = "select *
-from
-(
-select c.fullname,c.mobile,sum(o.totalamt) as totalamt,count(o.id) as count_order
-from orders o join customers c on o.customer_id = c.id
-where o.status not in('VO','VO_RETURN') and o.org_id = :org_id and o.orderdate >= :startdate and o.orderdate <= :enddate
-group by c.fullname,c.mobile order by totalamt DESC
-) as a
-where :conditions order by :orderby";
+            $query = DB::table('orders as o')
+                ->join('customers as c', 'o.customer_id', '=', 'c.id')
+                ->whereNotIn('o.status', ['VO', 'VO_RETURN'])
+                ->where('o.org_id', $orgId)
+                ->whereBetween('o.orderdate', [$startDateSql, $endDateSql])
+                ->groupBy('c.fullname', 'c.mobile')
+                ->select(
+                    'c.fullname',
+                    'c.mobile',
+                    DB::raw('SUM(o.totalamt) as totalamt'),
+                    DB::raw('COUNT(o.id) as count_order')
+                );
 
+            // เพิ่มเงื่อนไขให้ Query ตามประเภทลูกค้า
             if ($buyType == 'new') {
-                $sql = str_replace(':conditions', 'a.count_order = 1', $sql);
+                $query->having('count_order', '=', 1);
             } elseif ($buyType == 'duplicate') {
-                $sql = str_replace(':conditions', 'a.count_order > 1', $sql);
-            } else {
-                $sql = str_replace(':conditions', '1=1', $sql);
+                $query->having('count_order', '>', 1);
             }
 
+            // เพิ่มเงื่อนไขการเรียงลำดับ
             if ($orderby == 'value') {
-                //sum(o.totalamt) DESC
-                $sql = str_replace(':orderby', 'a.totalamt DESC', $sql);
+                $query->orderByDesc('totalamt');
             } else {
-                $sql = str_replace(':orderby', 'a.count_order DESC', $sql);
+                $query->orderByDesc('count_order');
             }
 
-            $customers = DB::select($sql, ['org_id' => $orgId, 'startdate' => $startDateSql, 'enddate' => $endDateSql]);
+            // ดึงข้อมูลออกมา
+            $customers = $query->get();
+
             //dd($customers);
         }
 
@@ -105,8 +109,8 @@ where :conditions order by :orderby";
             'endDateSql' => $endDateSql,
             'productCategories' => $productCategories,
             'customers' => $customers,
-            'buyType'=>$buyType,
-            'orderby'=>$orderby
+            'buyType' => $buyType,
+            'orderby' => $orderby
         ]);
     }
 
@@ -140,10 +144,19 @@ where :conditions order by :orderby";
     {
         $orgId = getOrgId();
 
-        $sql = "select c.fullname,c.mobile,sum(o.totalamt) as totalamt from orders o join customers c on o.customer_id = c.id where o.status not in('VO','VO_RETURN') and o.org_id = :org_id and o.orderdate >= :startdate and o.orderdate <= :enddate group by c.fullname,c.mobile order by totalamt DESC limit 10";
+        $results = DB::table('orders as o')
+            ->join('customers as c', 'o.customer_id', '=', 'c.id')
+            ->whereNotIn('o.status', ['VO', 'VO_RETURN'])
+            ->where('o.org_id', $orgId)
+            ->whereBetween('o.orderdate', [$startDate, $endDate])
+            ->groupBy('c.fullname', 'c.mobile')
+            ->orderByDesc('totalamt')
+            ->limit(10)
+            ->select('c.fullname', 'c.mobile', DB::raw('SUM(o.totalamt) as totalamt'))
+            ->get();
 
-        $results = DB::select($sql, ['org_id' => $orgId, 'startdate' => $startDate, 'enddate' => $endDate]);
-        //dd($results);
+
+
         return $results;
     }
 
@@ -152,17 +165,18 @@ where :conditions order by :orderby";
     {
         $orgId = getOrgId();
 
-        $sql = "select p.name,sum(line.amount) as totalamt
-            from
-                order_lines line
-                join products p on line.product_id = p.id
-                join orders o on line.order_id = o.id
-            where o.status not in('VO','VO_RETURN') and o.org_id = :org_id and o.orderdate >= :startdate and o.orderdate <= :enddate
-            group by p.name
-            order by totalamt DESC
-            limit 10 ";
+        $results = DB::table('order_lines as line')
+            ->join('products as p', 'line.product_id', '=', 'p.id')
+            ->join('orders as o', 'line.order_id', '=', 'o.id')
+            ->whereNotIn('o.status', ['VO', 'VO_RETURN'])
+            ->where('o.org_id', $orgId)
+            ->whereBetween('o.orderdate', [$startDate, $endDate])
+            ->groupBy('p.name')
+            ->orderByDesc('totalamt')
+            ->limit(10)
+            ->select('p.name', DB::raw('SUM(line.amount) as totalamt'))
+            ->get();
 
-        $results = DB::select($sql, ['org_id' => $orgId, 'startdate' => $startDate, 'enddate' => $endDate]);
         //dd($results);
         return $results;
     }

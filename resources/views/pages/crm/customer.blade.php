@@ -69,7 +69,7 @@
                             @foreach ($customers as $index => $item)
                             <tr>
                                 <td>{{ $index+1 }}</td>
-                                <td>{{ $item->fullname }}</td>
+                                <td>{{ Str::limit($item->fullname, 40) }} </td>
                                 <td>{{ $item->mobile }}</td>
                                 <td class="text-end">
                                     <x-label-price :amount="$item->totalamt" />

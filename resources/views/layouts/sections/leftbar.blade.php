@@ -33,8 +33,9 @@
 
                     <ul class="nav flex-column">
                         <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.new') }}">ออเดอร์ใหม่</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.checked') }}">ออเดอร์ยืนยันแล้ว</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.packing') }}">แพ็คสินค้า/เตรียมจัดส่ง</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.list') }}">ออเดอร์ยืนยันแล้ว</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.list') }}">แพ็คสินค้า/เตรียมจัดส่ง</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'DV']) }}">กำลังนำส่ง</a></li>
 
                     </ul>
                 </li>

@@ -65,8 +65,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(ManageOrderController::class)->group(function () {
         Route::get('/manageOrder/new', 'newOrder')->name('manageOrder.new');
-        Route::get('/manageOrder/checked', 'checked')->name('manageOrder.checked');
-        Route::get('/manageOrder/packing', 'packing')->name('manageOrder.packing');
+        Route::get('/manageOrder/list', 'list')->name('manageOrder.list');
     });
 
     Route::resources([

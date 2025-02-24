@@ -13,26 +13,31 @@ class ThailandPostService
     protected $apiKey = 'D%VFE6LjN&RFALUTPrKhX+K7JKFqFkI4A^TQD^HrQmKOIpCnX;J#KEBaOFAnIHP?S:T4P%CWOcRtCtF#NdMuH1BaS5KrLpY5WKQh'; // นำ API Key มาใส่ตรงนี้
 
     protected $apiKey2 = 'QcY=NTV*LqY5HiA$M7VDUBReX$O9J&YyY7KZOEFEO!AxQpPYR9UtG*VHEWJ#CvOOOTAYZkK&E%D~WeRAXsUoU!EgJhS9BKI-O:P&';
+    protected $apiKey3 = 'ClMyHkP=R=C4OEV7IHPeQ?MsIpFSFLK2LfF:MrA0Z4V-WYM=HAOtRYUOH?JJI9XrX:SVT7Q7D7J:QzP5JvSLVOP0KnQ=CaLrY+L-';
+
+    public $usedKey = '';
 
     // ดึง Token จาก Cache หรือ API
     public function getToken()
     {
         $nowHour = Carbon::now()->hour;
-        $key = $this->apiKey;
+        $cacheName = 'thailandpost_token_2';
+        $this->usedKey = $this->apiKey;
         if ($nowHour >= 12) {
-            $key = $this->apiKey2;
+            $cacheName = 'thailandpost_token_3';
+            $this->usedKey = $this->apiKey3;
         }
-        TelegramHelper::sendTelegram('used key: ' . $key);
-        //return Cache::remember('thailandpost_token', 86400, function () {
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Authorization' => "Token {$key}"
-        ])->post($this->apiUrl . "authenticate/token");
+        TelegramHelper::sendTelegram('used key: ' . $this->usedKey);
+        return Cache::remember($cacheName, 86400, function () {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+                'Authorization' => "Token {$this->usedKey}"
+            ])->post($this->apiUrl . "authenticate/token");
 
-        $data = $response->json();
-        //TelegramHelper::sendTelegram($data['token']);
-        return $data['token'] ?? null;
-        //});
+            $data = $response->json();
+            TelegramHelper::sendTelegram($data['token']);
+            return $data['token'] ?? null;
+        });
     }
 
     // ตรวจสอบสถานะพัสดุ

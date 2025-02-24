@@ -5,13 +5,15 @@
     <x-table.data-table>
         <thead>
             <tr>
-                <th>วันที่สร้าง</th>
+                <th>วันที่</th>
                 <th>วันที่ปริ้น</th>
                 <th>ลูกค้า</th>
                 <th>ออเดอร์</th>
 
-                <th>เลขพัสดุ</th>
                 <th>จำนวนเงิน</th>
+                <th>เลขพัสดุ</th>
+                <th>สถานะ</th>
+
                 <th width="100"></th>
             </tr>
         </thead>
@@ -33,14 +35,23 @@
                 </td>
                 <td><small>{{ $order->order_line_des }}</small></td>
 
+                <td class="text-end">
+                    {{ $order->payment_method }}
+                    <x-label-price :amount="$order->totalamt" /><br />
+
+                </td>
                 <td>
+
                     {{ $order->shipping->name }}:
                     <x-label-trackingno :trackingno="$order->trackingno" :shipping="$order->shipping->code" />
+                    @if (!empty($order->shipping_description))
+                    <small class="d-flex text-danger">{{ $order->shipping_description }}</small>
+                    @endif
                 </td>
-                <td class="text-end">
-                    <x-label-price :amount="$order->totalamt" /><br />
+                <td>
                     <x-order.status status="{{ $order->status }}" />
                 </td>
+
                 <td class="text-end">
                     <x-order.dropdown-menu :orderId="$order->id" />
                 </td>
