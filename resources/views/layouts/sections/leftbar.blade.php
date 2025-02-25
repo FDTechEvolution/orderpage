@@ -32,7 +32,7 @@
                     </a>
 
                     <ul class="nav flex-column">
-                        <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=DV'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.new') }}">ออเดอร์ใหม่</a></li>
+                        <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/index'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.index') }}">ออเดอร์ใหม่</a></li>
                         <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=CF'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'CF']) }}">ออเดอร์ยืนยันแล้ว</a></li>
                         <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=P1'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'P1']) }}">แพ็คสินค้า/เตรียมจัดส่ง</a></li>
                         <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=DV'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'DV']) }}">กำลังนำส่ง</a></li>

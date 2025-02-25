@@ -19,12 +19,15 @@
         </thead>
         <tbody>
             @foreach ($orders as $order)
-            <tr>
+            <tr data-action="click-row">
                 <td>
-                    <x-label-date :date="$order->orderdate" />
+                    <span class="d-flex">
+                        <x-label-date :date="$order->orderdate" /></span>
+                    <small class="text-muted smaller"> {{ $order->orderdate->diffForHumans() }}</small>
                 </td>
                 <td>
-                    <x-label-datetime :datetime="$order->print_date" />
+                    <small>
+                        <x-label-datetime :datetime="$order->print_date" /></small>
                 </td>
                 <td>
                     <strong>{{ $order->customer->fullname }}</strong>
@@ -60,3 +63,21 @@
         </tbody>
     </x-table.data-table>
 </div>
+@section('script')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let rows = document.querySelectorAll("[data-action='click-row']");
+        //console.log(rows);
+        rows.forEach(row => {
+            row.addEventListener("click", function() {
+                //console.log('click');
+                // ลบ class 'selected' ออกจากทุกแถวก่อน
+                rows.forEach(r => r.classList.remove("table-secondary"));
+                // เพิ่ม class 'selected' ให้แถวที่ถูกคลิก
+                this.classList.add("table-secondary");
+            });
+        });
+    });
+
+</script>
+@stop

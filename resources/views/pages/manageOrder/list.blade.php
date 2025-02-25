@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- bad -->
-                <a href="#" class="btn {{ $status=='NEW'?'btn-primary':'btn-soft btn-secondary' }}">
+                <a href="{{ route('manageOrder.index') }}" class="btn {{ $status=='NEW'?'btn-primary':'btn-soft btn-secondary' }}">
                     ออเดอร์ใหม่
                     <i class="fi fi-arrow-end"></i>
                 </a>

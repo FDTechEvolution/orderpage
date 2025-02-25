@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\AppStatusHelper;
 use App\Models\Order;
+use App\Models\TmpOrder;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -12,30 +13,12 @@ class ManageOrderController extends Controller
 
     public function index()
     {
-        $status = request()->status;
-        $dateRange = request()->date_range;
-        $startDate = '';
-        $endDate = '';
-        if (empty($status)) {
-            $status = 'CF';
-        }
-
-        if (!empty($dateRange)) {
-            $splits = explode('-', $dateRange);
-            $startDate = trim($splits[0]);
-            $endDate = trim($splits[1]);
-        }
-
-        if (empty($startDate)) {
-            $startDate = Carbon::now()->startOfMonth()->format('d/m/Y');
-        }
-        if (empty($endDate)) {
-            $endDate = Carbon::now()->endOfMonth()->format('d/m/Y');
-        }
+        $tmpOrders = TmpOrder::where('status', 'DR')->where('org_id', getOrgId())->orderBy('created', 'ASC')->get();
 
         return view('pages.manageOrder.index', [
             'title' => 'ออเดอร์ใหม่',
-            'description' => 'รายการออเดอร์ที่พนักงานส่งเข้ามา รอการยืนยันข้อมูลในขึ้นตอนถัดไป'
+            'description' => 'รายการออเดอร์ที่พนักงานส่งเข้ามา รอการยืนยันข้อมูลในขึ้นตอนถัดไป',
+            'tmpOrders' => $tmpOrders
         ]);
     }
 
