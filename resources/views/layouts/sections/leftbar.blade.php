@@ -21,7 +21,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item {{ Request::is('manageOrder*')?'active':''}}">
                     <a class="nav-link" href="#">
                         <i class="fa-solid fa-list"></i>
                         <span>ออเดอร์</span>
@@ -32,10 +32,10 @@
                     </a>
 
                     <ul class="nav flex-column">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.new') }}">ออเดอร์ใหม่</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.list') }}">ออเดอร์ยืนยันแล้ว</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.list') }}">แพ็คสินค้า/เตรียมจัดส่ง</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'DV']) }}">กำลังนำส่ง</a></li>
+                        <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=DV'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.new') }}">ออเดอร์ใหม่</a></li>
+                        <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=CF'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'CF']) }}">ออเดอร์ยืนยันแล้ว</a></li>
+                        <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=P1'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'P1']) }}">แพ็คสินค้า/เตรียมจัดส่ง</a></li>
+                        <li class="nav-item {{ Request::fullUrlIs(url('manageOrder/list?status=DV'))?'active':''}}"><a class="nav-link" href="{{ route('manageOrder.list',['status'=>'DV']) }}">กำลังนำส่ง</a></li>
 
                     </ul>
                 </li>

@@ -36,7 +36,7 @@
                 <td><small>{{ $order->order_line_des }}</small></td>
 
                 <td class="text-end">
-                    {{ $order->payment_method }}
+                    <x-order.label-payment-method payment_method="{{ $order->payment_method }}" />
                     <x-label-price :amount="$order->totalamt" /><br />
 
                 </td>
@@ -48,7 +48,7 @@
                     <small class="d-flex text-danger">{{ $order->shipping_description }}</small>
                     @endif
                 </td>
-                <td>
+                <td alt="{{ $order->status }}">
                     <x-order.status status="{{ $order->status }}" />
                 </td>
 

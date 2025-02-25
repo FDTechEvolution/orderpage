@@ -30,12 +30,8 @@
     <span class="bull bull-lg bg-success me-2"></span>
     <span>{{ $statuses[$status] }}</span>
 </span>
-@elseif($status == 'VO')
-<span class="badge bg-danger-soft rounded-pill d-inline-flex align-items-center">
-    <span class="bull bull-lg bg-danger me-2 animate-pulse-danger"></span>
-    <span>{{ $statuses[$status] }}</span>
-</span>
-@elseif($status == 'VO_RETURN')
+
+@elseif(in_array($status,['VO','ACC','RT','VO_RETURN']))
 <span class="badge bg-danger-soft rounded-pill d-inline-flex align-items-center">
     <span class="bull bull-lg bg-danger me-2 animate-pulse-danger"></span>
     <span>{{ $statuses[$status] }}</span>

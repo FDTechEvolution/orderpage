@@ -1,6 +1,6 @@
 <x-app-layout title="">
     <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="col-12">
             <x-card>
                 <h5>ออเดอร์หลัง 18:00 - 23:00</h5>
                 <x-form :action="route('dashboard.index')" method="GET">
@@ -17,22 +17,42 @@
                 </x-form>
 
                 <hr>
-                <table class="table table-sm">
-                    <tbody>
-                        @foreach ($daily as $item)
-                        <tr>
-                            <td>{{ $item->dt }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td class="text-end">
-                                <x-label-price :amount="$item->totalamt" />
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <table class="table table-sm">
+                            <tbody>
+                                @foreach ($daily as $item)
+                                <tr>
+                                    <td>{{ $item->dt }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td class="text-end">
+                                        <x-label-price :amount="$item->totalamt" />
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <table class="table table-sm">
+                            <tbody>
+                                @foreach ($sumary as $key=> $item)
+                                <tr>
+                                    <td>{{ $key }}</td>
+                                    <td class="text-end">
+                                        <x-label-price :amount="$item" />
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
 
             </x-card>
         </div>
+
     </div>
 
     @section('script')

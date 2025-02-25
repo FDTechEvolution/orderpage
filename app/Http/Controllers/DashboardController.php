@@ -43,12 +43,20 @@ class DashboardController extends Controller
                 ->groupBy('u.name')
                 ->orderBy('dt', 'asc')
                 ->get();
+            $sumary = [];
+            foreach ($daily as $item) {
+                if (!isset($sumary[$item->name])) {
+                    $sumary[$item->name] = 0;
+                }
+                $sumary[$item->name] += $item->totalamt;
+            }
             //dd($daily);
             return view('pages.dashboard.index_digis', [
                 'title' => '',
                 'startDate' => $startDate,
                 'endDate' => $endDate,
-                'daily' => $daily
+                'daily' => $daily,
+                'sumary' => $sumary
             ]);
         }
 

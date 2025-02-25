@@ -53,7 +53,7 @@ class ManageOrderController extends Controller
         }
 
         if ($status == 'DV') {
-            $filterStatus = ['DV', 'ST', 'RT'];
+            $filterStatus = ['DV', 'ST', 'RT', 'ACC'];
         } elseif ($status == 'P1') {
             $filterStatus = ['P1', 'WS'];
         } else {
@@ -92,9 +92,8 @@ class ManageOrderController extends Controller
             ->where('org_id', getOrgId())
             ->whereIn('status', $filterStatus)
             ->whereBetween('orderdate', [$startDateSql, $endDateSql])
-            ->orderBy('orderdate', 'ASC')->limit(3)
+            ->orderBy('orderdate', 'ASC')
             ->get();
-
 
         //$orderStatus = AppStatusHelper::getOrderStatus();
         return view('pages.manageOrder.list', [

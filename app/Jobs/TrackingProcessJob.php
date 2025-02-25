@@ -110,6 +110,12 @@ class TrackingProcessJob implements ShouldQueue
                             'shipping_description' => $lastShippingStatus['status_description'],
                             'status' => 'RT'
                         ];
+                    } elseif ($_shippingStatus == 'S103') {
+                        $updateData = [
+                            'shipping_status' => $_shippingStatus,
+                            'shipping_description' => $lastShippingStatus['status_description'],
+                            'status' => 'ACC'
+                        ];
                     } else {
                         $updateData = [
                             'shipping_status' => $_shippingStatus,

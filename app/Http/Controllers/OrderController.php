@@ -2,27 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppStatusHelper;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
 
-    public static function getOrderStatuses()
-    {
-        return [
-            'DR' => 'ฉบับร่าง',
-            'CF' => 'ยืนยัน',
-            'P1' => 'ปริ้น',
-            'WS' => 'รอจัดส่ง',
-            'ST' => 'ส่งแล้ว',
-            'DV' => 'กำลังจัดส่ง',
-            'RT' => 'ตีกลับ',
-            'VO' => 'ยกเลิกออเดอร์',
-            'VO_RETURN' => 'ปฏิเสธรับสินค้า/รับสินค้าคืน',
-            'RECEIVED' => 'ได้รับสินค้าแล้ว',
-        ];
-    }
 
     public static function getOrder($id)
     {
@@ -83,7 +69,7 @@ class OrderController extends Controller
 
         $orderHistory = CustomerController::getOrderHistoyies($order->customer->mobile);
 
-        $orderStatus = $this->getOrderStatuses();
+        $orderStatus = AppStatusHelper::getOrderStatus();
         return view('pages.order.edit', [
             'title' => 'แก้ไขออเดอร์',
             'order' => $order,
@@ -110,7 +96,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $oldStatus = $order->status;
         $newStatus = $request->status;
-        $status = $this->getOrderStatuses();
+        $status = AppStatusHelper::getOrderStatus();
         $title = sprintf('เปลี่ยนสถานะจาก %s เป็น %s', $status[$oldStatus], $status[$newStatus]);
         $description = $request->description;
 
