@@ -109,6 +109,24 @@ class OrderController extends Controller
         return redirect()->route('order.edit', ['order' => $id]);
     }
 
+    public function getChangeStatus($orderId, $status)
+    {
+        $order = Order::find($orderId);
+        $oldStatus = $order->status;
+        $newStatus = $status;
+        $status = AppStatusHelper::getOrderStatus();
+        $title = sprintf('เปลี่ยนสถานะจาก %s เป็น %s', $status[$oldStatus], $status[$newStatus]);
+        $description = '-';
+
+        $order->status = $newStatus;
+        $order->save();
+
+        OrderLogController::createLog($orderId, $title, $description);
+
+        session()->flash('success', $title . ' เรียบร้อยแล้ว!');
+        return redirect()->to(url()->previous());
+    }
+
     /**
      * Remove the specified resource from storage.
      */

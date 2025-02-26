@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(OrderController::class)->group(function () {
         Route::post('/order/changestatus/{order}', 'changeStatus')->name('order.changeStatus');
+        Route::get('/order/changestatus/{order}/{status}', 'getChangeStatus')->name('order.getChangeStatus');
     });
 
     Route::controller(CrmController::class)->group(function () {

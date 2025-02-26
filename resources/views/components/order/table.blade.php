@@ -56,7 +56,7 @@
                 </td>
 
                 <td class="text-end">
-                    <x-order.dropdown-menu :orderId="$order->id" />
+                    <x-order.dropdown-menu :orderId="$order->id" status="{{ $order->status }}" />
                 </td>
             </tr>
             @endforeach

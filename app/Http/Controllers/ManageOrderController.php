@@ -13,7 +13,7 @@ class ManageOrderController extends Controller
 
     public function index()
     {
-        $tmpOrders = TmpOrder::where('status', 'DR')->where('org_id', getOrgId())->orderBy('created', 'ASC')->get();
+        $tmpOrders = TmpOrder::select(['id', 'code', 'body', 'created', 'name'])->where('status', 'DR')->where('org_id', getOrgId())->orderBy('created', 'ASC')->get();
 
         return view('pages.manageOrder.index', [
             'title' => 'ออเดอร์ใหม่',
