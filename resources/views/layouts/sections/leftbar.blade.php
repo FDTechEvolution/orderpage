@@ -52,6 +52,22 @@
                         <span>CRM</span>
                     </a>
                 </li>
+                <li class="nav-item {{ Request::is('report*')?'active':''}}">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Report</span>
+                        <span class="group-icon float-end">
+                            <i class="fi fi-arrow-end"></i>
+                            <i class="fi fi-arrow-down"></i>
+                        </span>
+                    </a>
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item {{ Request::fullUrlIs(url('report/index'))?'active':''}}"><a class="nav-link" href="">Report Dashboard</a></li>
+                        <li class="nav-item {{ Request::fullUrlIs(url('report/export-order'))?'active':''}}"><a class="nav-link" href="{{ route('report.exportOrder',[]) }}">ส่งออกรายการออเดอร์</a></li>
+
+                    </ul>
+                </li>
 
 
                 <li class="nav-item mt-4 border-top">

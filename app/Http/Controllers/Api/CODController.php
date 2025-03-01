@@ -19,7 +19,9 @@ class CODController extends Controller
             return response()->json(['message' => 'ไม่พบออเดอร์ในระบบ', 'success' => false]);
         }
 
-        $order = Order::where(DB::raw("TRIM(trackingno)"), $trackingno)->first();
+        //$order = Order::where(DB::raw("TRIM(trackingno)"), $trackingno)->first();
+        $order = Order::whereRaw("TRIM(REPLACE(trackingno, CHAR(9), '')) = ?", [trim($trackingno)])->first();
+
         $amount = floatval($amount);
         if (empty($order)) {
             CodRecord::updateOrCreate(

@@ -90,6 +90,7 @@
         });
 
         function pageLoader() {
+            console.log('page load');
             $('#page-loader').show();
         }
 

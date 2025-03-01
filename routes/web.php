@@ -11,6 +11,7 @@ use App\Http\Controllers\ModalOrderController;
 use App\Http\Controllers\ModalOrderLineController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TrackingController;
 use App\Jobs\TrackingProcessJob;
@@ -67,6 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::controller(ManageOrderController::class)->group(function () {
         Route::get('/manageOrder/new', 'newOrder')->name('manageOrder.new');
         Route::get('/manageOrder/list', 'list')->name('manageOrder.list');
+    });
+
+    Route::controller(ReportController::class)->group(function () {
+        Route::get('/report/export-order', 'exportOrder')->name('report.exportOrder');
+        Route::post('/report/pull-order', 'pullOrder')->name('report.pullOrder');
+
+        Route::get('/report/export-customer', 'exportCustomer')->name('report.exportCustomer');
+        Route::post('/report/pull-customer', 'pullCustomer')->name('report.pullCustomer');
     });
 
     Route::resources([
