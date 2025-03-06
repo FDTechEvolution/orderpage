@@ -46,9 +46,9 @@ class ModalOrderController extends Controller
     {
         $order = Order::find($id);
 
-        return view('pages.modalOrder.edit',[
-            'title'=>'',
-            'order'=>$order
+        return view('pages.modalOrder.edit', [
+            'title' => '',
+            'order' => $order
         ]);
     }
 
@@ -66,14 +66,15 @@ class ModalOrderController extends Controller
         $order->description = $request->description;
         $order->shipping_id = $request->shipping_id;
 
-        if(!empty($request->trackingno)){
-            $order->trackingno = $request->trackingno;
+        if (!empty($request->trackingno)) {
+            $trackingno = trim(str_replace(["\t", "\n", "\r"], '', $request->trackingno));
+            $order->trackingno = $trackingno;
         }
 
         $order->save();
 
         session()->flash('success', 'บันทึกข้อมูลเรียบร้อยแล้ว!');
-        return redirect()->route('order.edit',['order'=>$order->id]);
+        return redirect()->route('order.edit', ['order' => $order->id]);
     }
 
     /**

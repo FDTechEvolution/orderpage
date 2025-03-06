@@ -65,6 +65,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item {{ Request::fullUrlIs(url('report/index'))?'active':''}}"><a class="nav-link" href="">Report Dashboard</a></li>
                         <li class="nav-item {{ Request::fullUrlIs(url('report/export-order'))?'active':''}}"><a class="nav-link" href="{{ route('report.exportOrder',[]) }}">ส่งออกรายการออเดอร์</a></li>
+                        <li class="nav-item {{ Request::fullUrlIs(url('report/export-customer'))?'active':''}}"><a class="nav-link" href="{{ route('report.exportCustomer',[]) }}">ส่งออกราชื่อลูกค้า</a></li>
 
                     </ul>
                 </li>

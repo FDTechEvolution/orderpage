@@ -73,8 +73,9 @@ class TrackingProcessJob implements ShouldQueue
 
         $trackings = [];
         foreach ($orders as $order) {
-            array_push($trackings, trim($order->trackingno));
+            array_push($trackings, trim(str_replace(["\t", "\n", "\r"], '', $order->trackingno)));
         }
+
         TelegramHelper::sendTelegram('start tracking ' . sizeof($trackings) . ' orders');
         $this->thailandPost = new ThailandPostService();
         $roundRequests = array_chunk($trackings, 20);
@@ -91,6 +92,8 @@ class TrackingProcessJob implements ShouldQueue
             }
 
             $items = $result['response']['items'];
+            $resultData = [];
+
             foreach ($items as $trackingno => $Shippingitems) {
                 if (!is_null($Shippingitems) && sizeof($Shippingitems) != 0) {
                     $successCount++;
@@ -123,11 +126,19 @@ class TrackingProcessJob implements ShouldQueue
                             'status' => 'DV'
                         ];
                     }
-                    Order::where('trackingno', $trackingno)->update($updateData);
+
+                    $updateData['trackingno'] = $trackingno;
+
+                    array_push($resultData, $updateData);
+
+                    //Order::whereRaw("TRIM(REPLACE(trackingno, CHAR(9), '')) = ?", [trim($trackingno)])->update($updateData);
                 } else {
-                    Order::where('trackingno', $trackingno)->update(['shipping_status' => 'NOTF']);
+                    Order::whereRaw("TRIM(REPLACE(trackingno, CHAR(9), '')) = ?", [trim($trackingno)])->update(['shipping_status' => 'NOTF']);
                 }
             }
+
+            //Product::upsert($data, ['id'], ['price', 'stock']);
+            Order::upsert($resultData, ['trackingno'], ['shipping_status', 'shipping_description', 'status']);
         }
 
         TelegramHelper::sendTelegram('success process ' . $successCount . ' orders.');
