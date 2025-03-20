@@ -27,8 +27,8 @@ class ThailandPostService
             $cacheName = 'thailandpost_token_3';
             $this->usedKey = $this->apiKey3;
 
-            $cacheName = 'thailandpost_token_4';
-            $this->usedKey = $this->apiKey2;
+            //$cacheName = 'thailandpost_token_4';
+            //$this->usedKey = $this->apiKey2;
         }
         TelegramHelper::sendTelegram('used key: ' . $this->usedKey);
         return Cache::remember($cacheName, 86400, function () {
