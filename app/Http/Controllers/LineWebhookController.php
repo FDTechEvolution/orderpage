@@ -63,12 +63,35 @@ class LineWebhookController extends Controller
                     $this->replyMessage($replyToken, "ไม่พบผู้ใช้งาน ID: {$lineUserId}");
                 }
                 $telegram_chat_id = $user->org->telegram_chat_id;
-                $orderCode = $this->orderService->generateTmpOrderCode($user->org_id);
 
-                $tmpOrder = $this->orderService->storeTmpOrder($orderCode, $user->name, $user->id, $user->org_id, $lineUserId, $userMessage);
-                if ($tmpOrder) {
-                    $this->replyMessage($replyToken, "บันทึกออเดอร์แล้ว: {$orderCode}");
-                    $this->sendNewOrderNotification($userMessage, $orderCode, $telegram_chat_id);
+                if (strlen($userMessage) > 70) {
+                    $orderCode = $this->orderService->generateTmpOrderCode($user->org_id);
+                    $tmpOrder = $this->orderService->storeTmpOrder($orderCode, $user->name, $user->id, $user->org_id, $lineUserId, $userMessage);
+                    if ($tmpOrder) {
+                        $this->replyMessage($replyToken, "บันทึกออเดอร์แล้ว: {$orderCode}");
+                        $this->sendNewOrderNotification($userMessage, $orderCode, $telegram_chat_id);
+                    }
+                } else if (strpos($userMessage, 'vo') === 0) {
+                    $spl = explode('vo', strtolower($userMessage));
+                    if (sizeof($spl) > 0) {
+                        $tmpOrderCode = $spl[1];
+                        $tmpOrderCode = str_replace(" ", "", $tmpOrderCode);
+                        $result = $this->orderService->voidTmpOrder($tmpOrderCode, $lineUserId);
+                        if ($result['status']) {
+                            $tmpOrder = $result['tmpOrder'];
+
+                            $_lineNotifyMsg = '**ยกเลิกออเดอร์**  ';
+                            $lineNotifyMsg = sprintf('%s %s', $_lineNotifyMsg, $tmpOrder['body']);
+
+                            $this->replyMessage($replyToken, "{$lineNotifyMsg}");
+                            $this->sendNotification($lineNotifyMsg, $telegram_chat_id);
+                        } else {
+                            $this->replyMessage($replyToken, "{$result['msg']}");
+                            $this->sendNotification($result['msg'], $telegram_chat_id);
+                        }
+                    }
+                    //$this->log('vo process','debug');
+                    //$replyMsg = $this->voidOrder($userTextLower, $lineUserId);
                 }
             }
         }
@@ -83,6 +106,16 @@ class LineWebhookController extends Controller
         }
         $txt = sprintf('%s : %s', $orderCode, $userMessage);
         $response = $this->telegramService->sendMessage($txt, $telegram_chat_id);
+
+        return true;
+    }
+
+    private function sendNotification($userMessage, $telegram_chat_id)
+    {
+        if (empty($telegram_chat_id)) {
+            return false;
+        }
+        $response = $this->telegramService->sendMessage($userMessage, $telegram_chat_id);
 
         return true;
     }

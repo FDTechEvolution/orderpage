@@ -40,12 +40,33 @@ class OrderService
             'name' => $username,
             'body' => $text,
             'user_id' => $userId,
-            'line_user_id' => $lineUserId,
+            'line_userid' => $lineUserId,
             'org_id' => $orgId,
             'status' => 'DR'
         ]);
         // Log::info('LINE Webhook Data:', json_encode($tmpOrder));
 
         return $tmpOrder;
+    }
+
+    public function voidTmpOrder($code, $lineUserId)
+    {
+        $tmpOrder = TmpOrder::where('code', $code)->where('line_userid', $lineUserId)->first();
+        if (empty($tmpOrder)) {
+            return [
+                'status' => false,
+                'msg' => 'ไม่พบออเดอร์',
+                'tmpOrder' => []
+            ];
+        } else {
+            $tmpOrder->status = 'VO';
+            $tmpOrder->save();
+
+            return [
+                'status' => true,
+                'msg' => '',
+                'tmpOrder' => $tmpOrder
+            ];
+        }
     }
 }
