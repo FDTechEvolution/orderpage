@@ -17,6 +17,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TrackingController;
 use App\Jobs\TrackingProcessJob;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
 
 Route::controller(GuestController::class)->group(function () {
@@ -25,6 +26,11 @@ Route::controller(GuestController::class)->group(function () {
 
 Route::get('/job/tracking', function () {
     TrackingProcessJob::dispatch();
+    return response()->json(['success' => true]);
+});
+
+Route::get('/clear', function () {
+    Cache::flush();
     return response()->json(['success' => true]);
 });
 
