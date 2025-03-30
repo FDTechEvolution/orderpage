@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function org()
+    {
+        return $this->hasOne(Org::class, 'id', 'org_id');
+    }
 }

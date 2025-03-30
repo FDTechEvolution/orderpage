@@ -31,30 +31,31 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Org extends Model
 {
     use HasUuids;
-	protected $table = 'orgs';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'orgs';
+    public $incrementing = false;
+    public $timestamps = false;
 
-	protected $casts = [
-		'created' => 'datetime',
-		'modified' => 'datetime'
-	];
+    protected $casts = [
+        'created' => 'datetime',
+        'modified' => 'datetime'
+    ];
 
-	protected $hidden = [
-		'line_notify_token'
-	];
+    protected $hidden = [
+        'line_notify_token'
+    ];
 
-	protected $fillable = [
-		'name',
-		'created',
-		'modified',
-		'description',
-		'isactive',
-		'mobileno',
-		'code',
-		'line_notify_token',
-		'user_id',
-		'isperfect',
-		'address'
-	];
+    protected $fillable = [
+        'name',
+        'created',
+        'modified',
+        'description',
+        'isactive',
+        'mobileno',
+        'code',
+        'line_notify_token',
+        'user_id',
+        'isperfect',
+        'address',
+        'telegram_chat_id'
+    ];
 }

@@ -4,6 +4,7 @@ namespace App\View\Components\Selection;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 
 class Shipping extends Component
@@ -21,8 +22,10 @@ class Shipping extends Component
      */
     public function render(): View|Closure|string
     {
-        $shippings = \App\Models\Shipping::where('isactive','Y')->where('org_id',getOrgId())->orderBy('name','ASC')->get();
 
-        return view('components.selection.shipping',['shippings'=>$shippings]);
+        $shippings = Cache::remember('shipping_option', 10080, function () {
+            return \App\Models\Shipping::where('isactive', 'Y')->where('org_id', getOrgId())->orderBy('name', 'ASC')->get();
+        });
+        return view('components.selection.shipping', ['shippings' => $shippings]);
     }
 }

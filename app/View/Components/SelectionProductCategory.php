@@ -24,7 +24,7 @@ class SelectionProductCategory extends Component
      */
     public function render(): View|Closure|string
     {
-        $productCategoryOptions = Cache::remember('product_catogory_active_options_' . getOrgId(), 60, function () {
+        $productCategoryOptions = Cache::remember('product_catogory_active_options_' . getOrgId(), 10080, function () {
             return ProductCategory::where('org_id', getOrgId())
                 ->where('isactive', 'Y')
                 ->orderBy('name')

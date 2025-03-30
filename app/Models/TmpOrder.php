@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * Class TmpOrder
- * 
+ *
  * @property string $id
  * @property string $code
  * @property string|null $name
@@ -39,37 +40,40 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TmpOrder extends Model
 {
-	protected $table = 'tmp_orders';
-	public $incrementing = false;
-	public $timestamps = false;
+    use HasUuids;
+    protected $table = 'tmp_orders';
+    public $incrementing = false;
+    public $timestamps = true;
 
-	protected $casts = [
-		'created' => 'datetime',
-		'modified' => 'datetime',
-		'price' => 'float'
-	];
+    protected $casts = [
+        'created' => 'datetime',
+        'modified' => 'datetime',
+        'created_at' => 'datetime',
+        'modified_at' => 'datetime',
+        'price' => 'float'
+    ];
 
-	protected $fillable = [
-		'code',
-		'name',
-		'body',
-		'created',
-		'modified',
-		'status',
-		'user_id',
-		'modifiedby',
-		'type',
-		'address',
-		'mobile',
-		'price',
-		'description',
-		'source',
-		'slip_path1',
-		'slip_path2',
-		'line_userid',
-		'payment_method',
-		'org_id',
-		'issent_notification',
-		'label'
-	];
+    protected $fillable = [
+        'code',
+        'name',
+        'body',
+        'created',
+        'modified',
+        'status',
+        'user_id',
+        'modifiedby',
+        'type',
+        'address',
+        'mobile',
+        'price',
+        'description',
+        'source',
+        'slip_path1',
+        'slip_path2',
+        'line_userid',
+        'payment_method',
+        'org_id',
+        'issent_notification',
+        'label'
+    ];
 }
