@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <x-card>
-                <h5>ออเดอร์หลัง 18:00 - 23:00</h5>
+                <h5>ออเดอร์หลัง 17:30 - 05:00</h5>
                 <x-form :action="route('dashboard.index')" method="GET">
                     <div class="row">
                         <div class="col-10">

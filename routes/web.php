@@ -5,6 +5,7 @@ use App\Http\Controllers\CrmController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\LineWebhookController;
 use App\Http\Controllers\ManageOrderController;
 use App\Http\Controllers\ModalCustomerController;
 use App\Http\Controllers\ModalOrderController;
@@ -27,6 +28,7 @@ Route::get('/job/tracking', function () {
     return response()->json(['success' => true]);
 });
 
+Route::post('/webhook/line', [LineWebhookController::class, 'handle']);
 
 
 /*

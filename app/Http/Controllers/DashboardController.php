@@ -38,7 +38,7 @@ class DashboardController extends Controller
                 ->where('o.org_id', '13c658f1-7e56-423e-8347-a0cdf9bc12f9')
                 ->where("o.orderdate", '>=', $startDateSql)
                 ->where("o.orderdate", '<=', $endDateSql)
-                ->whereRaw("(DATE_FORMAT(tmp.created,'%H') >= ? or DATE_FORMAT(tmp.created,'%H') <= ?)", ['18', '05'])
+                ->whereRaw("(DATE_FORMAT(tmp.created,'%H:%i') >= ? or DATE_FORMAT(tmp.created,'%H') <= ?)", ['17:30', '05'])
 
                 ->groupBy(DB::raw("DATE_FORMAT(tmp.created,'%Y-%m-%d')"))
                 ->groupBy('u.name')
