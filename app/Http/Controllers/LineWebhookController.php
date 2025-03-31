@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankSlip;
+use App\Models\TmpOrder;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -9,7 +11,12 @@ use Illuminate\Support\Facades\Http;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\Cache;
 use App\Services\TelegramService;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Cache\Store;
 
 class LineWebhookController extends Controller
 {
@@ -28,9 +35,24 @@ class LineWebhookController extends Controller
 
     public function handle(Request $request)
     {
+        $lineAccessToken = env('LINE_ACCESS_TOKEN');
+        $channelSecret = env('LINE_CHANNEL_SECRET');
+
+
+        $events = $request->input('events');
+
+        if (!$events) {
+            return response()->json(['message' => 'No events'], 200);
+        }
+
         // รับ JSON Payload
         $data = $request->all();
-        //Log::info('LINE Webhook Data:', $data);
+        $events = $request->input('events');
+        if (!$events) {
+            return response()->json(['message' => 'No events'], 200);
+        }
+
+
 
         foreach ($data['events'] as $event) {
             $replyToken = $event['replyToken'] ?? null;
@@ -46,7 +68,7 @@ class LineWebhookController extends Controller
             $userMessage = strip_tags($userMessage); // ลบแท็ก HTML (ถ้ามี)
 
 
-            if ($replyToken && $userMessage) {
+            if ($replyToken) {
                 //$user = $this->Users->find()->where(['Users.line_userid'=>$lineUserId])->first();
                 $cacheKey = 'user_' . $lineUserId;
                 $user = Cache::remember($cacheKey, 10080, function () use ($lineUserId) {
@@ -58,40 +80,90 @@ class LineWebhookController extends Controller
                         ->first();
                 });
 
-                if (is_null($user) || empty($user->org_id)) {
-                    Cache::forget($cacheKey);
-                    $this->replyMessage($replyToken, "ไม่พบผู้ใช้งาน ID: {$lineUserId}");
-                }
                 $telegram_chat_id = $user->org->telegram_chat_id;
 
-                if (strlen($userMessage) > 70) {
-                    $orderCode = $this->orderService->generateTmpOrderCode($user->org_id);
-                    $tmpOrder = $this->orderService->storeTmpOrder($orderCode, $user->name, $user->id, $user->org_id, $lineUserId, $userMessage);
-                    if ($tmpOrder) {
-                        $this->replyMessage($replyToken, "บันทึกออเดอร์แล้ว: {$orderCode}");
-                        $this->sendNewOrderNotification($userMessage, $orderCode, $telegram_chat_id);
+
+                if ($event['message']['type'] == 'text') {
+                    if (is_null($user) || empty($user->org_id)) {
+                        Cache::forget($cacheKey);
+                        $this->replyMessage($replyToken, "ไม่พบผู้ใช้งาน ID: {$lineUserId}");
                     }
-                } else if (strpos($userMessage, 'vo') === 0) {
-                    $spl = explode('vo', strtolower($userMessage));
-                    if (sizeof($spl) > 0) {
-                        $tmpOrderCode = $spl[1];
-                        $tmpOrderCode = str_replace(" ", "", $tmpOrderCode);
-                        $result = $this->orderService->voidTmpOrder($tmpOrderCode, $lineUserId);
-                        if ($result['status']) {
-                            $tmpOrder = $result['tmpOrder'];
 
-                            $_lineNotifyMsg = '**ยกเลิกออเดอร์**  ';
-                            $lineNotifyMsg = sprintf('%s %s', $_lineNotifyMsg, $tmpOrder['body']);
 
-                            $this->replyMessage($replyToken, "{$lineNotifyMsg}");
-                            $this->sendNotification($lineNotifyMsg, $telegram_chat_id);
+                    if (strlen($userMessage) > 70) {
+                        $orderCode = $this->orderService->generateTmpOrderCode($user->org_id);
+                        $tmpOrder = $this->orderService->storeTmpOrder($orderCode, $user->name, $user->id, $user->org_id, $lineUserId, $userMessage);
+                        if ($tmpOrder) {
+                            $this->replyMessage($replyToken, "บันทึกออเดอร์แล้ว: {$orderCode}");
+                            $this->sendNewOrderNotification($userMessage, $orderCode, $telegram_chat_id, $user->name);
+                        }
+                    } else if (strpos(strtolower($userMessage), 'vo') === 0) {
+                        $spl = explode('vo', strtolower($userMessage));
+                        if (sizeof($spl) > 0) {
+                            $tmpOrderCode = $spl[1];
+                            $tmpOrderCode = str_replace(" ", "", $tmpOrderCode);
+                            $result = $this->orderService->voidTmpOrder($tmpOrderCode, $lineUserId);
+                            if ($result['status']) {
+                                $tmpOrder = $result['tmpOrder'];
+
+                                $_lineNotifyMsg = '**ยกเลิกออเดอร์**  ';
+                                $lineNotifyMsg = sprintf('%s %s', $_lineNotifyMsg, $tmpOrder['body']);
+
+                                $this->replyMessage($replyToken, "{$lineNotifyMsg}");
+                                $this->sendNotification($lineNotifyMsg, $telegram_chat_id);
+                            } else {
+                                $this->replyMessage($replyToken, "{$result['msg']}");
+                                $this->sendNotification($result['msg'], $telegram_chat_id);
+                            }
+                        }
+                        //$this->log('vo process','debug');
+                        //$replyMsg = $this->voidOrder($userTextLower, $lineUserId);
+                    }
+                } else if ($event['message']['type'] === 'image') {
+
+                    $lineAccessToken = env('LINE_ACCESS_TOKEN');
+                    $channelSecret = env('LINE_CHANNEL_SECRET');
+
+                    // ใช้ GuzzleHttp\Client แทน CurlHTTPClient
+                    $httpClient = new Client([
+                        'base_uri' => 'https://api-data.line.me',
+                        'headers' => [
+                            'Authorization' => 'Bearer ' . $lineAccessToken,
+                            'Content-Type' => 'application/json',
+                        ]
+                    ]);
+
+
+                    $messageId = $event['message']['id'];
+
+                    // ดึงไฟล์รูปภาพจาก LINE API
+                    $response = $httpClient->get("v2/bot/message/$messageId/content");
+
+                    if ($response->getStatusCode() == 200) {
+                        $tmpOrder = TmpOrder::select('id', 'code', 'org_id')->where('line_userid', $lineUserId)
+                            ->orderBy('created_at', 'DESC')->first();
+
+                        if (!empty($tmpOrder)) {
+                            $imageData = $response->getBody()->getContents();
+                            $year = Carbon::now()->format('Y');
+                            $fileName = "slip/{$tmpOrder->org_id}/{$year}/line_{$messageId}.jpg";
+                            $result = Storage::disk('images')->put($fileName, $imageData);
+
+                            if ($result) {
+                                $this->replyMessage($replyToken, "บันทึกรูปภาพแล้ว ของออเดอร์ {$tmpOrder->code}");
+                                $bankSlip = BankSlip::create([
+                                    'tmp_order_id' => $tmpOrder->id,
+                                    'filename' => $fileName,
+                                    'path' => env('APP_URL') . '/uploads/images/' . $fileName,
+                                ]);
+                                if ($bankSlip) {
+                                    $this->sendNotification("สลิปออเดอร์ {$tmpOrder->code}   [URL]({$bankSlip->path})", $telegram_chat_id);
+                                }
+                            }
                         } else {
-                            $this->replyMessage($replyToken, "{$result['msg']}");
-                            $this->sendNotification($result['msg'], $telegram_chat_id);
+                            $this->replyMessage($replyToken, "ไม่พบออเดอร์");
                         }
                     }
-                    //$this->log('vo process','debug');
-                    //$replyMsg = $this->voidOrder($userTextLower, $lineUserId);
                 }
             }
         }
@@ -99,12 +171,12 @@ class LineWebhookController extends Controller
         return response()->json(['status' => 'ok']);
     }
 
-    private function sendNewOrderNotification($userMessage, $orderCode, $telegram_chat_id)
+    private function sendNewOrderNotification($userMessage, $orderCode, $telegram_chat_id, $username)
     {
         if (empty($telegram_chat_id)) {
             return false;
         }
-        $txt = sprintf('%s : %s', $orderCode, $userMessage);
+        $txt = sprintf('%s :(%s) %s', $username, $orderCode, $userMessage);
         $response = $this->telegramService->sendMessage($txt, $telegram_chat_id);
 
         return true;

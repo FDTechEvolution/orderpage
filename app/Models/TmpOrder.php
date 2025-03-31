@@ -76,4 +76,9 @@ class TmpOrder extends Model
         'issent_notification',
         'label'
     ];
+
+    public function org()
+    {
+        return $this->hasOne(Org::class, 'id', 'org_id');
+    }
 }

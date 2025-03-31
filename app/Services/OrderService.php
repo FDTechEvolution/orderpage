@@ -42,7 +42,9 @@ class OrderService
             'user_id' => $userId,
             'line_userid' => $lineUserId,
             'org_id' => $orgId,
-            'status' => 'DR'
+            'status' => 'DR',
+            'created' => Carbon::now(),
+            'modified' => Carbon::now(),
         ]);
         // Log::info('LINE Webhook Data:', json_encode($tmpOrder));
 
