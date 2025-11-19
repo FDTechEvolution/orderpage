@@ -11,6 +11,7 @@ use App\Http\Controllers\ModalCustomerController;
 use App\Http\Controllers\ModalOrderController;
 use App\Http\Controllers\ModalOrderLineController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PrintSetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
@@ -86,6 +87,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/report/pull-customer', 'pullCustomer')->name('report.pullCustomer');
     });
 
+    Route::controller(PrintSetController::class)->group(function () {
+        Route::get('/printSet/export/{printSet}', 'export')->name('printSet.export');
+    });
+
+
     Route::resources([
         'search' => SearchController::class,
         'order' => OrderController::class,
@@ -93,7 +99,8 @@ Route::middleware('auth')->group(function () {
         'modalOrderLine' => ModalOrderLineController::class,
         'modalOrder' => ModalOrderController::class,
         'manageOrder' => ManageOrderController::class,
-        'customer' => CustomerController::class
+        'customer' => CustomerController::class,
+        'printSet' => PrintSetController::class
     ]);
 });
 

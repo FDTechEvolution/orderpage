@@ -11,6 +11,9 @@
                 <div class="col-12 col-lg-4">
                     <x-selection-order-status />
                 </div>
+                <div class="col-12 col-lg-4">
+                    <x-selection.shipping :required="false" />
+                </div>
             </div>
             <hr>
             <div class="row">

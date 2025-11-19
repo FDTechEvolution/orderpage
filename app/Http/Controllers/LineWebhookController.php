@@ -40,7 +40,7 @@ class LineWebhookController extends Controller
 
 
         $events = $request->input('events');
-
+        //Log::debug('line access');
         if (!$events) {
             return response()->json(['message' => 'No events'], 200);
         }
@@ -48,6 +48,7 @@ class LineWebhookController extends Controller
         // รับ JSON Payload
         $data = $request->all();
         $events = $request->input('events');
+
         if (!$events) {
             return response()->json(['message' => 'No events'], 200);
         }

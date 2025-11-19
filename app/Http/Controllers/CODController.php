@@ -36,7 +36,8 @@ class CODController extends Controller
         $startDateSql = $dateRange['startDateYMD'];
         $endDateSql = $dateRange['endDateYMD'];
 
-        $orders = Order::where('status', 'ST')->where('org_id', getOrgId())
+        $orders = Order::where('org_id', getOrgId())
+            //->where('status', 'ST')
             ->where('payment_method', 'COD')
             ->where('is_cod_received', 'N')
             ->where('orderdate', '>=', $startDateSql)
@@ -51,7 +52,7 @@ class CODController extends Controller
             ->where('orderdate', '<=', $endDateSql)
             ->where('payment_method', 'COD')
             ->where('is_cod_received', 'N')
-            ->where('status', 'ST')
+            //->where('status', 'ST')
             ->groupBy('shippings.name')->get();
 
 

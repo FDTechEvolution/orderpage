@@ -28,6 +28,7 @@ class ReportController extends Controller
         $productCategoryId = $request->product_category_id;
         $productId = $request->product_id;
         $status = $request->status;
+        $shippingId = $request->shiping_id;
 
         $dateRange = UtilsHelper::dateRangToDates($dateRange);
         $startDate = $dateRange['startDateYMD'];
@@ -38,6 +39,9 @@ class ReportController extends Controller
             ->where('org_id', getOrgId());
         if (!empty($status)) {
             $orders = $orders->where('status', $status);
+        }
+        if (!empty($shippingId)) {
+            $orders = $orders->where('shipping_id', $shippingId);
         }
 
 
